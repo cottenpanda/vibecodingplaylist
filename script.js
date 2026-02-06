@@ -111,6 +111,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Track if current video is YouTube
+  let isYouTube = false;
+  const panelVideoContainer = document.getElementById('panelVideoContainer');
+
   // Open panel with track data
   function openPanel(index) {
     const track = tracks[index];
@@ -118,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const artist = track.querySelector('.track-artist').textContent;
     const desc = track.querySelector('.track-desc')?.innerHTML || '';
     const video = track.querySelector('video source')?.getAttribute('src') || '';
+    const youtubeId = track.getAttribute('data-youtube');
     const duration = track.querySelector('.track-duration').textContent;
 
     // Update panel content
@@ -126,9 +131,33 @@ document.addEventListener('DOMContentLoaded', () => {
     panelDesc.innerHTML = desc;
     panelTotalTime.textContent = duration;
 
-    // Update video source
-    panelVideo.querySelector('source').setAttribute('src', video);
-    panelVideo.load();
+    // Handle YouTube vs native video
+    if (youtubeId) {
+      isYouTube = true;
+      panelVideo.style.display = 'none';
+      // Remove existing iframe if any
+      const existingIframe = panelVideoContainer.querySelector('iframe');
+      if (existingIframe) existingIframe.remove();
+      // Create YouTube iframe
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&loop=1&playlist=${youtubeId}&mute=0&controls=1&modestbranding=1&rel=0`;
+      iframe.width = '100%';
+      iframe.height = '100%';
+      iframe.frameBorder = '0';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      iframe.id = 'youtubePlayer';
+      panelVideoContainer.appendChild(iframe);
+    } else {
+      isYouTube = false;
+      // Remove YouTube iframe if exists
+      const existingIframe = panelVideoContainer.querySelector('iframe');
+      if (existingIframe) existingIframe.remove();
+      panelVideo.style.display = 'block';
+      // Update video source
+      panelVideo.querySelector('source').setAttribute('src', video);
+      panelVideo.load();
+    }
 
     // Open panel
     videoPanel.classList.add('active');
@@ -146,8 +175,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update ambient colors
     updateAmbientColors(index);
 
-    // Auto play
-    panelVideo.play();
+    // Auto play (only for native video)
+    if (!isYouTube) {
+      panelVideo.play();
+    }
     isPlaying = true;
     panelPlayBtn.classList.add('playing');
     playPauseBtn.classList.add('playing');
@@ -160,9 +191,15 @@ document.addEventListener('DOMContentLoaded', () => {
     isPanelOpen = false;
 
     // Stop video
-    panelVideo.pause();
-    panelVideo.currentTime = 0;
+    if (isYouTube) {
+      const iframe = panelVideoContainer.querySelector('iframe');
+      if (iframe) iframe.remove();
+    } else {
+      panelVideo.pause();
+      panelVideo.currentTime = 0;
+    }
     isPlaying = false;
+    isYouTube = false;
     panelPlayBtn.classList.remove('playing');
     playPauseBtn.classList.remove('playing');
 

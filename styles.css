@@ -1083,6 +1083,13 @@ body.panel-open .panel-vinyl-drop {
   background: var(--bg);
 }
 
+.panel-video iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 12px;
+}
+
 .panel-info {
   flex: 1;
   display: flex;
