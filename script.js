@@ -115,6 +115,23 @@ document.addEventListener('DOMContentLoaded', () => {
   let isYouTube = false;
   const panelVideoContainer = document.getElementById('panelVideoContainer');
 
+  // Load YouTube fallback
+  function loadYouTube(youtubeId) {
+    isYouTube = true;
+    panelVideo.style.display = 'none';
+    const existingIframe = panelVideoContainer.querySelector('iframe');
+    if (existingIframe) existingIframe.remove();
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&loop=1&playlist=${youtubeId}&mute=0&controls=1&modestbranding=1&rel=0`;
+    iframe.width = '100%';
+    iframe.height = '100%';
+    iframe.frameBorder = '0';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    iframe.id = 'youtubePlayer';
+    panelVideoContainer.appendChild(iframe);
+  }
+
   // Open panel with track data
   function openPanel(index) {
     const track = tracks[index];
@@ -131,32 +148,22 @@ document.addEventListener('DOMContentLoaded', () => {
     panelDesc.innerHTML = desc;
     panelTotalTime.textContent = duration;
 
-    // Handle YouTube vs native video
+    // Reset state
+    isYouTube = false;
+    const existingIframe = panelVideoContainer.querySelector('iframe');
+    if (existingIframe) existingIframe.remove();
+    panelVideo.style.display = 'block';
+
+    // Try local video first, fallback to YouTube if it fails
+    panelVideo.querySelector('source').setAttribute('src', video);
+    panelVideo.load();
+
+    // If local video fails and we have YouTube fallback
     if (youtubeId) {
-      isYouTube = true;
-      panelVideo.style.display = 'none';
-      // Remove existing iframe if any
-      const existingIframe = panelVideoContainer.querySelector('iframe');
-      if (existingIframe) existingIframe.remove();
-      // Create YouTube iframe
-      const iframe = document.createElement('iframe');
-      iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1&loop=1&playlist=${youtubeId}&mute=0&controls=1&modestbranding=1&rel=0`;
-      iframe.width = '100%';
-      iframe.height = '100%';
-      iframe.frameBorder = '0';
-      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
-      iframe.allowFullscreen = true;
-      iframe.id = 'youtubePlayer';
-      panelVideoContainer.appendChild(iframe);
-    } else {
-      isYouTube = false;
-      // Remove YouTube iframe if exists
-      const existingIframe = panelVideoContainer.querySelector('iframe');
-      if (existingIframe) existingIframe.remove();
-      panelVideo.style.display = 'block';
-      // Update video source
-      panelVideo.querySelector('source').setAttribute('src', video);
-      panelVideo.load();
+      panelVideo.onerror = () => loadYouTube(youtubeId);
+      // Also check if source fails to load
+      const source = panelVideo.querySelector('source');
+      source.onerror = () => loadYouTube(youtubeId);
     }
 
     // Open panel
@@ -175,10 +182,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update ambient colors
     updateAmbientColors(index);
 
-    // Auto play (only for native video)
-    if (!isYouTube) {
-      panelVideo.play();
-    }
+    // Auto play
+    panelVideo.play().catch(() => {
+      // If play fails and we have YouTube, use it
+      if (youtubeId && !isYouTube) {
+        loadYouTube(youtubeId);
+      }
+    });
     isPlaying = true;
     panelPlayBtn.classList.add('playing');
     playPauseBtn.classList.add('playing');
