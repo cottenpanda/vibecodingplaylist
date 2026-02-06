@@ -1,0 +1,22 @@
+# Videos and large media
+Project video/
+*.mov
+*.MOV
+*.mp4
+*.MP4
+
+# Large GIFs
+*.gif
+
+# Backup folders
+Backup/
+backup-pixel-grid/
+Style reference/
+
+# System files
+.DS_Store
+*.JPG
+
+# Other large/unnecessary files
+2025 nature.mov
+folder_animation.html

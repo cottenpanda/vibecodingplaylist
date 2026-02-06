@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yan Liu - Vibe Coding</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Grain overlay -->
+  <div class="grain"></div>
+
+  <!-- Gradient blobs -->
+  <div class="gradient-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="playlist-container" id="playlistContainer">
+
+    <!-- Playlist Header -->
+    <header class="playlist-header">
+      <div class="playlist-cover">
+        <div class="cover-art"></div>
+        <div class="tonearm">
+          <div class="tonearm-base"></div>
+          <div class="tonearm-arm">
+            <div class="tonearm-head"></div>
+          </div>
+        </div>
+      </div>
+      <div class="playlist-info">
+        <span class="playlist-label">PLAYLIST</span>
+        <h1 class="playlist-title">VIBE CODING</h1>
+        <p class="playlist-meta">
+          <span class="artist-name">yanliudesign</span>
+          <span class="meta-dot">•</span>
+          <span>2026</span>
+          <span class="meta-dot">•</span>
+          <span class="track-count">14 projects</span>
+        </p>
+        <p class="playlist-desc">Design + AI experiments. Building things with code and creativity.</p>
+        <div class="playlist-actions">
+          <button class="play-btn" id="playAllBtn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <div class="social-icons">
+            <a href="https://x.com/yanliudesign" target="_blank" rel="noopener noreferrer" class="social-icon" title="X">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/yanliudesign" target="_blank" rel="noopener noreferrer" class="social-icon" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.figma.com/@yanliu" target="_blank" rel="noopener noreferrer" class="social-icon" title="Figma">
+              <svg viewBox="0 0 38 57" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+            <svg class="scribble-star" viewBox="0 0 40 40">
+        <polygon points="20,2 25,15 38,15 27,24 32,38 20,29 8,38 13,24 2,15 15,15" fill="none" stroke="#FF6B9D" stroke-width="2"/>
+      </svg>
+    </header>
+
+    <!-- Track List -->
+    <div class="track-list">
+      <div class="track-header">
+        <span class="track-num">#</span>
+        <span class="track-title-header">TITLE</span>
+        <span class="track-tool">MADE WITH</span>
+        <span class="track-duration">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><polyline points="12,6 12,12 16,14" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </span>
+      </div>
+
+      <!-- Track 1 -->
+      <div class="track" data-track="1">
+        <span class="track-num">1</span>
+        <div class="track-info">
+          <span class="track-title">Cozy Journaling</span>
+          <span class="track-artist">Claude Sonnet 4.5</span>
+        </div>
+        <span class="track-tool">Claude Code</span>
+        <span class="track-duration">0:21</span>
+        <div class="track-expanded">
+          <div class="track-video">
+            <video loop playsinline>
+              <source src="Project video/cozy journaling.MOV" type="video/mp4">
+            </video>
+          </div>
+          <p class="track-desc">Participated in "Built with Claude Sonnet 4.5" challenge. Built this mini app called Cozy Journaling — write notes, doodle your emotions, reorder freely, and let it dissolve into particles when you're ready to move on.</p>
+        </div>
+      </div>
+
+      <!-- Track 2 -->
+      <div class="track" data-track="2">
+        <span class="track-num">2</span>
+        <div class="track-info">
+          <span class="track-title">yanliuos</span>
+          <span class="track-artist">Multi-tool</span>
+        </div>
+        <span class="track-tool">Claude + Figma + ChatGPT</span>
+        <span class="track-duration">0:37</span>
+        <div class="track-expanded">
+          <div class="track-video">
+            <video loop playsinline>
+              <source src="Project video/yanliuos.MOV" type="video/mp4">
+            </video>
+          </div>
+          <p class="track-desc">Cooked up my own little desktop OS. Main tools I used: Claude Code for vibe coding, Figma for avatar and mood track illustration, ChatGPT for desktop wallpapers and app icons. AI is unlocking things I never thought I could do.<br><span style="white-space: nowrap;">Try it: <a href="https://cottenpanda.github.io/yanliuos" target="_blank" rel="noopener noreferrer">https://cottenpanda.github.io/yanliuos</a></span></p>
+        </div>
+      </div>
+
+      <!-- Track 3 -->
+      <div class="track" data-track="3">
+        <span class="track-num">3</span>
+        <div class="track-info">
+          <span class="track-title">Mindstream</span>
+          <span class="track-artist">Gemini 3 Pro</span>
+        </div>
+        <span class="track-tool">Google AI Studio</span>
+        <span class="track-duration">1:49</span>
+        <div class="track-expanded">
+          <div class="track-video">
+            <video loop playsinline>
+              <source src="Project video/Mindstream_YanL.MOV" type="video/mp4">
+            </video>
+          </div>
+          <p class="track-desc">I personally struggle with writing thoughts down… then never finding them again. They pile up, get buried, and disappear. I built Mindstream to capture thoughts freely—and turn patterns into insights and actionable next steps.</p>
+        </div>
+      </div>
+
+      <!-- Track 4 -->
+      <div class="track" data-track="4">
+        <span class="track-num">4</span>
+        <div class="track-info">
+          <span class="track-title">Focus now</span>
+          <span class="track-artist">Claude Code</span>
+        </div>
+        <span class="track-tool">Claude Code</span>
+        <span class="track-duration">0:23</span>
+        <div class="track-expanded">
+          <div class="track-video">
+            <video loop playsinline>
+              <source src="Project video/Focus now.MOV" type="video/mp4">
+            </video>
+          </div>
+          <p class="track-desc">Built my first Chrome extension with Claude Code. It lets me park extra tabs in one click, stay focused, and bring them back only when I need them. Less clutter. More clarity. Honestly… I needed this.<br><span style="white-space: nowrap;">Try it: <a href="https://chromewebstore.google.com/detail/focus-now/bnobjnmlkkklphpconeoocodldgkjabf" target="_blank" rel="noopener noreferrer">https://chromewebstore.google.com/detail/focus-now/bnobjnmlkkklphpconeoocodldgkjabf</a></span></p>
+        </div>
+      </div>
+
+      <!-- Track 5 -->
+      <div class="track" data-track="5">
+        <span class="track-num">5</span>
+        <div class="track-info">
+          <span class="track-title">Virtual Online Studio</span>
+          <span class="track-artist">Gemini 3 Pro</span>
+        </div>
+        <span class="track-tool">Cursor</span>
+        <span class="track-duration">0:24</span>
+        <div class="track-expanded">
+          <div class="track-video">
+            <video loop playsinline>
+              <source src="Project video/Virtual online studio.MOV" type="video/mp4">
+            </video>
+          </div>
+          <p class="track-desc">Experimented with Gemini 3 Pro in Cursor—built in about an hour. The prototype supports voice-prompted image generation, hand-gesture swiping, and camera style switching.</p>
+        </div>
+      </div>
+
+      <!-- Track 6 -->
+      <div class="track" data-track="6">
+        <span class="track-num">6</span>
+        <div class="track-info">
+          <span class="track-title">3D Cabin</span>
+          <span class="track-artist">Claude Opus 4.5</span>
+        </div>
+        <span class="track-tool">Claude Chat</span>
+        <span class="track-duration">0:26</span>
+        <div class="track-expanded">
+          <div class="track-video">
+            <video loop playsinline>
+              <source src="Project video/3D cabin.mov" type="video/mp4">
+            </video>
+          </div>
+          <p class="track-desc">Made this 3D cabin scene using Claude Chat Opus 4.5. Workflow was simple: prompt, add a few visual references, debug, iterate—repeat until the scene comes together.</p>
+        </div>
+      </div>
+
+      <!-- Track 7 -->
+      <div class="track" data-track="7">
+        <span class="track-num">7</span>
+        <div class="track-info">
+          <span class="track-title">One, not many</span>
+          <span class="track-artist">Claude Opus 4.5</span>
+        </div>
+        <span class="track-tool">Claude Chat</span>
+        <span class="track-duration">0:10</span>
+        <div class="track-expanded">
+          <div class="track-video">
+            <video loop playsinline>
+              <source src="Project video/Fish swimming.MOV" type="video/mp4">
+            </video>
+          </div>
+          <p class="track-desc">Created this animation in Claude using the latest Opus 4.5. Saw a clip of one little fish swimming against the whole school—tiny rebel energy. Here's to being the one!</p>
+        </div>
+      </div>
+
+      <!-- Track 8 -->
+      <div class="track" data-track="8">
+        <span class="track-num">8</span>
+        <div class="track-info">
+          <span class="track-title">PixelArt Studio</span>
+          <span class="track-artist">Figma Makeathon</span>
+        </div>
+        <span class="track-tool">Figma Make</span>
+        <span class="track-duration">0:11</span>
+        <div class="track-expanded">
+          <div class="track-video">
+            <video loop playsinline>
+              <source src="Project video/virtual.MOV" type="video/mp4">
+            </video>
+          </div>
+          <p class="track-desc">Participated in "Figma Makeathon". Cooked a tiny web studio for pixelated, glitched, dithered GIFs — fast and in-browser.</p>
+        </div>
+      </div>
+
+      <!-- Track 9 -->
+      <div class="track" data-track="9">
+        <span class="track-num">9</span>
+        <div class="track-info">
+          <span class="track-title">Halloween Pumpkin Carving</span>
+          <span class="track-artist">Figma Make</span>
+        </div>
+        <span class="track-tool">Figma Make</span>
+        <span class="track-duration">0:13</span>
+        <div class="track-expanded">
+          <div class="track-video">
+            <video loop playsinline>
+              <source src="Project video/halloween.MOV" type="video/mp4">
+            </video>
+          </div>
+          <p class="track-desc">Another Figma Make experiment: a pumpkin carving tool. Hope it brings a smile!</p>
+        </div>
+      </div>
+
+      <!-- Track 10 -->
+      <div class="track" data-track="10">
+        <span class="track-num">10</span>
+        <div class="track-info">
+          <span class="track-title">Painting Gallery</span>
+          <span class="track-artist">Figma Make</span>
+        </div>
+        <span class="track-tool">Figma Make</span>
+        <span class="track-duration">0:16</span>
+        <div class="track-expanded">
+          <div class="track-video">
+            <video loop playsinline>
+              <source src="Project video/draw.MOV" type="video/mp4">
+            </video>
+          </div>
+          <p class="track-desc">Built entirely in Figma Make. Sketch directly on the canvas, turn neon lines into a painting, and double-click to make them disappear—like magic.</p>
+        </div>
+      </div>
+
+      <!-- Track 11 -->
+      <div class="track" data-track="11">
+        <span class="track-num">11</span>
+        <div class="track-info">
+          <span class="track-title">Credit card scanning</span>
+          <span class="track-artist">Gemini 3</span>
+        </div>
+        <span class="track-tool">Google AI Studio</span>
+        <span class="track-duration">0:11</span>
+        <div class="track-expanded">
+          <div class="track-video">
+            <video loop playsinline>
+              <source src="Project video/Credit scanning.MP4" type="video/mp4">
+            </video>
+          </div>
+          <p class="track-desc">Made this credit card scanning effect in Google AI Studio using Gemini 3. The speed and quality is impressive. AI tools become creative collaborators.</p>
+        </div>
+      </div>
+
+      <!-- Track 12 -->
+      <div class="track" data-track="12">
+        <span class="track-num">12</span>
+        <div class="track-info">
+          <span class="track-title">Vintage Computer</span>
+          <span class="track-artist">Cursor</span>
+        </div>
+        <span class="track-tool">Cursor</span>
+        <span class="track-duration">0:17</span>
+        <div class="track-expanded">
+          <div class="track-video">
+            <video loop playsinline>
+              <source src="Project video/vintage computer.MOV" type="video/mp4">
+            </video>
+          </div>
+          <p class="track-desc">This early vibe coding project, created with Cursor in June 2025, created a vintage computer interface controlled entirely through keyboard input—imperfect, but so exciting to see it come to life.</p>
+        </div>
+      </div>
+
+      <!-- Track 13 -->
+      <div class="track" data-track="13">
+        <span class="track-num">13</span>
+        <div class="track-info">
+          <span class="track-title">suno vibe code the vibe</span>
+          <span class="track-artist">Claude + Suno</span>
+        </div>
+        <span class="track-tool">Claude + Suno</span>
+        <span class="track-duration">2:49</span>
+        <div class="track-expanded">
+          <div class="track-video">
+            <video loop playsinline>
+              <source src="Project video/Suno vibe code the vibe.MOV" type="video/mp4">
+            </video>
+          </div>
+          <p class="track-desc">Claude wrote the lyrics and designed the music play experience. Suno generated the track. Exploring what creative collaboration can look like with AI.</p>
+        </div>
+      </div>
+
+      <!-- Track 14 -->
+      <div class="track" data-track="14">
+        <span class="track-num">14</span>
+        <div class="track-info">
+          <span class="track-title">Fireworks</span>
+          <span class="track-artist">Claude Chat</span>
+        </div>
+        <span class="track-tool">Claude Chat</span>
+        <span class="track-duration">0:15</span>
+        <div class="track-expanded">
+          <div class="track-video">
+            <video loop playsinline>
+              <source src="Project video/Fireworks.MOV" type="video/mp4">
+            </video>
+          </div>
+          <p class="track-desc">Missed the Seattle 2026 new year fireworks. So I built something in 10 minutes using Claude App as my first New Year gift. Hello 2026—let's start another learning journey!</p>
+        </div>
+      </div>
+    </div>
+
+  <!-- Vinyl Drop Animation -->
+  <div class="panel-vinyl-drop" id="vinylDrop">
+    <div class="panel-vinyl-record">
+      <div class="panel-vinyl-grooves"></div>
+      <div class="panel-vinyl-label"></div>
+    </div>
+  </div>
+
+  <!-- Right Panel (Video Player) -->
+  <div class="video-panel" id="videoPanel">
+    <button class="panel-close" id="panelClose">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 6L6 18M6 6l12 12"/>
+      </svg>
+    </button>
+    <div class="panel-content">
+      <div class="panel-video">
+        <video id="panelVideo" playsinline>
+          <source src="" type="video/mp4">
+        </video>
+      </div>
+      <div class="panel-info">
+        <h2 class="panel-title" id="panelTitle">Track Title</h2>
+        <p class="panel-artist" id="panelArtist">Artist</p>
+        <p class="panel-desc" id="panelDesc">Description</p>
+        <div class="panel-controls">
+          <button class="panel-control-btn" id="panelPrevBtn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="19,20 9,12 19,4"/><rect x="5" y="4" width="2" height="16"/></svg>
+          </button>
+          <button class="panel-control-btn panel-play-btn" id="panelPlayBtn">
+            <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+            <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+          </button>
+          <button class="panel-control-btn" id="panelNextBtn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,4 15,12 5,20"/><rect x="17" y="4" width="2" height="16"/></svg>
+          </button>
+        </div>
+        <div class="panel-progress">
+          <span class="panel-time" id="panelCurrentTime">0:00</span>
+          <div class="panel-progress-bar" id="panelProgressBar">
+            <div class="panel-progress-fill" id="panelProgressFill"></div>
+          </div>
+          <span class="panel-time" id="panelTotalTime">0:00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Now Playing Bar -->
+  <div class="now-playing" id="nowPlaying">
+      <div class="now-playing-info">
+        <div class="now-playing-thumb" id="nowPlayingThumb">
+          <div class="mini-vinyl">
+            <div class="mini-vinyl-groove"></div>
+            <div class="mini-vinyl-label"></div>
+          </div>
+        </div>
+        <div class="now-playing-text">
+          <span class="now-playing-title" id="nowPlayingTitle">Select a track</span>
+          <span class="now-playing-artist" id="nowPlayingArtist">—</span>
+        </div>
+      </div>
+      <div class="now-playing-controls">
+        <button class="control-btn" id="prevBtn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="19,20 9,12 19,4"/><rect x="5" y="4" width="2" height="16"/></svg>
+        </button>
+        <button class="control-btn play-pause" id="playPauseBtn">
+          <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+          <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        </button>
+        <button class="control-btn" id="nextBtn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,4 15,12 5,20"/><rect x="17" y="4" width="2" height="16"/></svg>
+        </button>
+      </div>
+      <div class="now-playing-progress">
+        <span class="progress-time">0:00</span>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span class="progress-time" id="totalTime">0:00</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
