@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ['#06B6D4', '#F43F5E', '#A3E635', '#8B5CF6'], // 10. Painting Gallery
     ['#EF4444', '#3B82F6', '#FBBF24', '#10B981'], // 11. Credit card scanning
     ['#6B7280', '#9CA3AF', '#4B5563', '#D1D5DB'], // 12. Vintage Computer
-    ['#EC4899', '#8B5CF6', '#06B6D4', '#F59E0B'], // 13. Suno
+    ['#EC4899', '#8B5CF6', '#06B6D4', '#F59E0B'], // 13. Vibe code the vibe
     ['#F59E0B', '#EF4444', '#A855F7', '#22C55E'], // 14. Fireworks
   ];
 
