@@ -4,6 +4,22 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Typewriter effect for title
+  const typewriterEl = document.getElementById('typewriter');
+  const titleText = 'VIBE CODING';
+  let charIndex = 0;
+
+  function typeWriter() {
+    if (charIndex < titleText.length) {
+      typewriterEl.textContent += titleText.charAt(charIndex);
+      charIndex++;
+      setTimeout(typeWriter, 100);
+    }
+  }
+
+  // Start typewriter after a short delay
+  setTimeout(typeWriter, 500);
+
   // Elements
   const tracks = document.querySelectorAll('.track');
   const playlistContainer = document.getElementById('playlistContainer');
