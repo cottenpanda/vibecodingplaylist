@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ['#6B7280', '#9CA3AF', '#4B5563', '#D1D5DB'], // 12. Vintage Computer
     ['#EC4899', '#8B5CF6', '#06B6D4', '#F59E0B'], // 13. Vibe code the vibe
     ['#F59E0B', '#EF4444', '#A855F7', '#22C55E'], // 14. Fireworks
+    ['#00FF00', '#0066FF', '#FF00FF', '#00FFFF'], // 15. Pixel rain mini game
   ];
 
   // Default blob colors
