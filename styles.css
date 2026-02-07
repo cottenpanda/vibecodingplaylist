@@ -66,8 +66,8 @@ body {
 .blob {
   position: absolute;
   border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.15;
+  filter: blur(100px);
+  opacity: 0.2;
   transition: background 1.5s ease;
   will-change: transform;
 }

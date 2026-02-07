@@ -34,11 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // Default blob colors
   const defaultColors = ['#F5A623', '#4ABDAC', '#FC6E51', '#F7B733'];
 
-  // Blobs react to mouse movement
+  // Blobs: ambient floating + mouse reaction
   let mouseX = 0;
   let mouseY = 0;
   let blobX = 0;
   let blobY = 0;
+  let time = 0;
 
   document.addEventListener('mousemove', (e) => {
     mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
@@ -46,15 +47,24 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   function animateBlobs() {
+    time += 0.005;
+
     // Smooth lerp toward mouse position
-    blobX += (mouseX - blobX) * 0.05;
-    blobY += (mouseY - blobY) * 0.05;
+    blobX += (mouseX - blobX) * 0.03;
+    blobY += (mouseY - blobY) * 0.03;
 
     blobs.forEach((blob, i) => {
-      const speed = (i + 1) * 15;
-      const xOffset = blobX * speed;
-      const yOffset = blobY * speed;
-      blob.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+      // Mouse-reactive movement
+      const mouseSpeed = (i + 1) * 20;
+      const xMouse = blobX * mouseSpeed;
+      const yMouse = blobY * mouseSpeed;
+
+      // Ambient floating animation (each blob has unique pattern)
+      const floatX = Math.sin(time * (0.5 + i * 0.2)) * (30 + i * 10);
+      const floatY = Math.cos(time * (0.4 + i * 0.15)) * (25 + i * 8);
+      const scale = 1 + Math.sin(time * (0.3 + i * 0.1)) * 0.1;
+
+      blob.style.transform = `translate(${xMouse + floatX}px, ${yMouse + floatY}px) scale(${scale})`;
     });
 
     requestAnimationFrame(animateBlobs);
