@@ -68,7 +68,8 @@ body {
   border-radius: 50%;
   filter: blur(120px);
   opacity: 0.15;
-  transition: background 1.5s ease, transform 1.5s ease;
+  transition: background 1.5s ease;
+  will-change: transform;
 }
 
 .blob-1 {
@@ -520,13 +521,15 @@ body {
   grid-template-columns: 48px 1fr 200px 80px;
   gap: 16px;
   padding: 12px 16px;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: background 0.2s ease, transform 0.15s ease-out, box-shadow 0.2s ease;
   position: relative;
   opacity: 0;
   transform: translateY(20px);
   animation: trackFadeIn 0.5s ease forwards;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .track:nth-child(2) { animation-delay: 0.05s; }
@@ -552,6 +555,7 @@ body {
 .track:hover,
 .track:active {
   background: var(--bg-highlight);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(29, 185, 84, 0.1);
 }
 
 .track.active {

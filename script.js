@@ -34,6 +34,34 @@ document.addEventListener('DOMContentLoaded', () => {
   // Default blob colors
   const defaultColors = ['#F5A623', '#4ABDAC', '#FC6E51', '#F7B733'];
 
+  // Blobs react to mouse movement
+  let mouseX = 0;
+  let mouseY = 0;
+  let blobX = 0;
+  let blobY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
+
+  function animateBlobs() {
+    // Smooth lerp toward mouse position
+    blobX += (mouseX - blobX) * 0.05;
+    blobY += (mouseY - blobY) * 0.05;
+
+    blobs.forEach((blob, i) => {
+      const speed = (i + 1) * 15;
+      const xOffset = blobX * speed;
+      const yOffset = blobY * speed;
+      blob.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+    });
+
+    requestAnimationFrame(animateBlobs);
+  }
+
+  animateBlobs();
+
   // Update ambient colors based on track
   function updateAmbientColors(trackIndex) {
     const colors = trackIndex >= 0 ? trackColors[trackIndex] : defaultColors;
@@ -224,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateAmbientColors(-1);
   }
 
-  // Track click
+  // Track click and 3D tilt effect
   tracks.forEach((track, index) => {
     track.addEventListener('click', () => {
       if (currentTrackIndex === index && isPanelOpen) {
@@ -234,6 +262,23 @@ document.addEventListener('DOMContentLoaded', () => {
         // Open panel with new track
         openPanel(index);
       }
+    });
+
+    // 3D tilt on hover
+    track.addEventListener('mousemove', (e) => {
+      const rect = track.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = (y - centerY) / centerY * -8;
+      const rotateY = (x - centerX) / centerX * 8;
+
+      track.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+    });
+
+    track.addEventListener('mouseleave', () => {
+      track.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
     });
   });
 
