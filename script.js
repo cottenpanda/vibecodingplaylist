@@ -7,18 +7,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // Typewriter effect for title
   const typewriterEl = document.getElementById('typewriter');
   const titleText = 'VIBE CODING';
-  let charIndex = 0;
 
-  function typeWriter() {
-    if (charIndex < titleText.length) {
-      typewriterEl.textContent += titleText.charAt(charIndex);
-      charIndex++;
-      setTimeout(typeWriter, 100);
-    }
-  }
-
-  // Start typewriter after a short delay
-  setTimeout(typeWriter, 500);
+  // Create spans for each letter with staggered animation
+  titleText.split('').forEach((char, i) => {
+    const span = document.createElement('span');
+    span.className = 'letter';
+    span.textContent = char === ' ' ? '\u00A0' : char;
+    span.style.animationDelay = `${0.5 + i * 0.08}s`;
+    typewriterEl.appendChild(span);
+  });
 
   // Elements
   const tracks = document.querySelectorAll('.track');
