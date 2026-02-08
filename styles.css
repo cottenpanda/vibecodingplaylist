@@ -925,8 +925,8 @@ body {
   position: fixed;
   top: 16px;
   right: 16px;
+  bottom: 106px;
   width: calc(50% - 32px);
-  height: calc(100vh - 122px);
   background:
     linear-gradient(
       160deg,
@@ -1356,9 +1356,9 @@ body.panel-open .playlist-container {
 }
 
 body.panel-open .now-playing {
-  transform: translateY(100%);
-  opacity: 0;
-  pointer-events: none;
+  width: 50%;
+  left: 0;
+  right: auto;
 }
 
 .playlist-header {
