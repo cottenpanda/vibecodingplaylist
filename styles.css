@@ -1425,8 +1425,8 @@ body.panel-open .playlist-actions {
 }
 
 body.panel-open .scribble-star {
-  opacity: 0;
-  pointer-events: none;
+  opacity: 1;
+  z-index: 60;
 }
 
 body.panel-open .track-expanded {
