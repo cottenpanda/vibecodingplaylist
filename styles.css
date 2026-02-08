@@ -1312,6 +1312,21 @@ body.panel-open .panel-vinyl-drop {
   transform: rotate(90deg) scale(1.1);
 }
 
+.secret-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  padding: 0 24px;
+  z-index: 5;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  line-height: 1.5;
+}
+
 .secret-close svg {
   width: 16px;
   height: 16px;
