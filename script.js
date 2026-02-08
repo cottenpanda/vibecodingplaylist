@@ -250,6 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const artist = track.querySelector('.track-artist').textContent;
     const desc = track.querySelector('.track-desc')?.innerHTML || '';
     const video = track.querySelector('video source')?.getAttribute('src') || '';
+    const cloudinaryUrl = track.querySelector('video')?.getAttribute('data-cloudinary') || '';
     const youtubeId = track.getAttribute('data-youtube');
     const duration = track.querySelector('.track-duration').textContent;
 
@@ -265,17 +266,29 @@ document.addEventListener('DOMContentLoaded', () => {
     if (existingIframe) existingIframe.remove();
     panelVideo.style.display = 'block';
 
-    // Try local video first, fallback to YouTube if it fails
+    // Try local video first, fallback to Cloudinary, then YouTube
     panelVideo.querySelector('source').setAttribute('src', video);
     panelVideo.load();
 
-    // If local video fails and we have YouTube fallback
-    if (youtubeId) {
-      panelVideo.onerror = () => loadYouTube(youtubeId);
-      // Also check if source fails to load
-      const source = panelVideo.querySelector('source');
-      source.onerror = () => loadYouTube(youtubeId);
+    // Handle video loading errors with fallback chain
+    const source = panelVideo.querySelector('source');
+    let triedCloudinary = false;
+
+    function handleVideoError() {
+      if (cloudinaryUrl && !triedCloudinary) {
+        triedCloudinary = true;
+        source.setAttribute('src', cloudinaryUrl);
+        panelVideo.load();
+        panelVideo.play().catch(() => {
+          if (youtubeId) loadYouTube(youtubeId);
+        });
+      } else if (youtubeId) {
+        loadYouTube(youtubeId);
+      }
     }
+
+    panelVideo.onerror = handleVideoError;
+    source.onerror = handleVideoError;
 
     // Open panel
     videoPanel.classList.add('active');
