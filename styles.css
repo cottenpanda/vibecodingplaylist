@@ -1248,7 +1248,7 @@ body.panel-open .panel-vinyl-drop {
 }
 
 /* Secret Video Popover */
-.artist-name-wrap {
+.playlist-info {
   position: relative;
 }
 
@@ -1263,7 +1263,7 @@ body.panel-open .panel-vinyl-drop {
 
 .secret-popover {
   position: absolute;
-  top: calc(100% + 8px);
+  top: 160px;
   left: 0;
   width: 400px;
   border-radius: 16px;

@@ -162,6 +162,15 @@ document.addEventListener('DOMContentLoaded', () => {
   if (artistName && secretPopover) {
     artistName.addEventListener('click', (e) => {
       e.stopPropagation();
+
+      // Position popover directly below yanliudesign
+      const rect = artistName.getBoundingClientRect();
+      const playlistInfo = document.querySelector('.playlist-info');
+      const infoRect = playlistInfo.getBoundingClientRect();
+
+      secretPopover.style.top = (rect.bottom - infoRect.top + 8) + 'px';
+      secretPopover.style.left = (rect.left - infoRect.left) + 'px';
+
       secretPopover.classList.toggle('active');
       if (secretPopover.classList.contains('active')) {
         secretVideo.play();
