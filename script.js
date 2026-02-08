@@ -147,47 +147,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const playlistCover = document.querySelector('.playlist-cover');
   const playlistHeader = document.querySelector('.playlist-header');
 
-  // Secret easter egg
-  const secretOverlay = document.getElementById('secretOverlay');
-  const secretClose = document.getElementById('secretClose');
+  // Secret video popover
+  const artistName = document.querySelector('.artist-name');
+  const secretPopover = document.getElementById('secretPopover');
   const secretVideo = document.getElementById('secretVideo');
-  let needleSwings = 0;
 
-  // Needle swing to reveal secret
-  if (playlistCover) {
-    playlistCover.addEventListener('click', (e) => {
-      // Don't trigger if panel is open
-      if (isPanelOpen) return;
-
-      // Swing the needle
-      playlistCover.classList.add('tapped');
-      setTimeout(() => playlistCover.classList.remove('tapped'), 1500);
-
-      needleSwings++;
-
-      // After 5 swings, reveal the secret
-      if (needleSwings >= 5) {
-        secretOverlay.classList.add('active');
+  if (artistName && secretPopover) {
+    artistName.addEventListener('click', (e) => {
+      e.stopPropagation();
+      secretPopover.classList.toggle('active');
+      if (secretPopover.classList.contains('active')) {
         secretVideo.play();
-        needleSwings = 0;
+      } else {
+        secretVideo.pause();
+        secretVideo.currentTime = 0;
       }
     });
-  }
 
-  // Close secret overlay
-  if (secretClose) {
-    secretClose.addEventListener('click', () => {
-      secretOverlay.classList.remove('active');
-      secretVideo.pause();
-      secretVideo.currentTime = 0;
-    });
-  }
-
-  // Close on overlay background click
-  if (secretOverlay) {
-    secretOverlay.addEventListener('click', (e) => {
-      if (e.target === secretOverlay) {
-        secretOverlay.classList.remove('active');
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!secretPopover.contains(e.target) && !artistName.contains(e.target)) {
+        secretPopover.classList.remove('active');
         secretVideo.pause();
         secretVideo.currentTime = 0;
       }

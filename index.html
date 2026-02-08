@@ -39,7 +39,14 @@
         <span class="playlist-label">PLAYLIST</span>
         <h1 class="playlist-title"><span id="typewriter"></span></h1>
         <p class="playlist-meta">
-          <span class="artist-name">yanliudesign</span>
+          <span class="artist-name-wrapper">
+            <span class="artist-name">yanliudesign</span>
+            <div class="secret-popover" id="secretPopover">
+              <video id="secretVideo" playsinline muted>
+                <source src="2025 nature.mov" type="video/mp4">
+              </video>
+            </div>
+          </span>
           <span class="meta-dot">•</span>
           <span>2026</span>
           <span class="meta-dot">•</span>
@@ -365,25 +372,6 @@
       </div>
     </div>
 
-  <!-- Secret Easter Egg Overlay -->
-  <div class="secret-overlay" id="secretOverlay">
-    <div class="secret-card">
-      <button class="secret-close" id="secretClose">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M18 6L6 18M6 6l12 12"/>
-        </svg>
-      </button>
-      <div class="secret-video">
-        <video id="secretVideo" controls playsinline>
-          <source src="2025 nature.mov" type="video/mp4">
-        </video>
-      </div>
-      <div class="secret-info">
-        <h3 class="secret-title">You found me!</h3>
-        <p class="secret-desc">A little nature moment from 2025. Thanks for exploring.</p>
-      </div>
-    </div>
-  </div>
 
   <!-- Vinyl Drop Animation -->
   <div class="panel-vinyl-drop" id="vinylDrop">
