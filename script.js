@@ -565,95 +565,69 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Mobile swipe gestures with physical feedback
-  let touchStartX = 0;
-  let touchStartY = 0;
-  let currentTranslateX = 0;
-  let isSwiping = false;
-  let swipeDirection = null;
+  // Mobile swipe on video content (not panel) to change tracks
+  const panelContent = document.querySelector('.panel-content');
+  let videoTouchStartX = 0;
+  let videoTouchCurrentX = 0;
+  let isVideoSwiping = false;
 
-  videoPanel.addEventListener('touchstart', (e) => {
-    // Don't interfere with progress bar
-    if (e.target.closest('.panel-progress-bar')) return;
+  if (panelContent) {
+    panelContent.addEventListener('touchstart', (e) => {
+      // Don't interfere with progress bar
+      if (e.target.closest('.panel-progress-bar')) return;
 
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-    currentTranslateX = 0;
-    isSwiping = false;
-    swipeDirection = null;
-    videoPanel.style.transition = 'none';
-  }, { passive: true });
+      videoTouchStartX = e.touches[0].clientX;
+      videoTouchCurrentX = 0;
+      isVideoSwiping = true;
+      panelContent.style.transition = 'none';
+    }, { passive: true });
 
-  videoPanel.addEventListener('touchmove', (e) => {
-    if (e.target.closest('.panel-progress-bar')) return;
+    panelContent.addEventListener('touchmove', (e) => {
+      if (!isVideoSwiping || e.target.closest('.panel-progress-bar')) return;
 
-    const touchX = e.touches[0].clientX;
-    const touchY = e.touches[0].clientY;
-    const diffX = touchX - touchStartX;
-    const diffY = touchY - touchStartY;
+      const touchX = e.touches[0].clientX;
+      const diffX = touchX - videoTouchStartX;
+      videoTouchCurrentX = diffX * 0.5; // Resistance
+      panelContent.style.transform = `translateX(${videoTouchCurrentX}px)`;
+    }, { passive: true });
 
-    // Determine swipe direction on first significant move
-    if (!swipeDirection && (Math.abs(diffX) > 10 || Math.abs(diffY) > 10)) {
-      swipeDirection = Math.abs(diffX) > Math.abs(diffY) ? 'horizontal' : 'vertical';
-    }
+    panelContent.addEventListener('touchend', (e) => {
+      if (!isVideoSwiping) return;
 
-    if (swipeDirection === 'horizontal') {
-      isSwiping = true;
-      currentTranslateX = diffX * 0.8; // Slight resistance
-      videoPanel.style.transform = `translateX(${currentTranslateX}px)`;
-    } else if (swipeDirection === 'vertical' && diffY > 0) {
-      isSwiping = true;
-      videoPanel.style.transform = `translateY(${diffY * 0.5}px)`;
-      videoPanel.style.opacity = 1 - (diffY / 400);
-    }
-  }, { passive: true });
+      const swipeThreshold = 60;
+      panelContent.style.transition = 'transform 0.3s ease';
 
-  videoPanel.addEventListener('touchend', (e) => {
-    if (!isSwiping) return;
-
-    const swipeThreshold = 80;
-    videoPanel.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-
-    if (swipeDirection === 'horizontal') {
-      if (currentTranslateX > swipeThreshold && currentTrackIndex > 0) {
+      if (videoTouchCurrentX > swipeThreshold && currentTrackIndex > 0) {
         // Swipe right - previous track
-        videoPanel.style.transform = 'translateX(100%)';
+        panelContent.style.transform = 'translateX(100%)';
         setTimeout(() => {
-          videoPanel.style.transition = 'none';
-          videoPanel.style.transform = 'translateX(-100%)';
+          panelContent.style.transition = 'none';
+          panelContent.style.transform = 'translateX(-100%)';
           openPanel(currentTrackIndex - 1);
-          setTimeout(() => {
-            videoPanel.style.transition = 'transform 0.3s ease';
-            videoPanel.style.transform = 'translateX(0)';
-          }, 50);
+          requestAnimationFrame(() => {
+            panelContent.style.transition = 'transform 0.3s ease';
+            panelContent.style.transform = 'translateX(0)';
+          });
         }, 200);
-      } else if (currentTranslateX < -swipeThreshold && currentTrackIndex < tracks.length - 1) {
+      } else if (videoTouchCurrentX < -swipeThreshold && currentTrackIndex < tracks.length - 1) {
         // Swipe left - next track
-        videoPanel.style.transform = 'translateX(-100%)';
+        panelContent.style.transform = 'translateX(-100%)';
         setTimeout(() => {
-          videoPanel.style.transition = 'none';
-          videoPanel.style.transform = 'translateX(100%)';
+          panelContent.style.transition = 'none';
+          panelContent.style.transform = 'translateX(100%)';
           openPanel(currentTrackIndex + 1);
-          setTimeout(() => {
-            videoPanel.style.transition = 'transform 0.3s ease';
-            videoPanel.style.transform = 'translateX(0)';
-          }, 50);
+          requestAnimationFrame(() => {
+            panelContent.style.transition = 'transform 0.3s ease';
+            panelContent.style.transform = 'translateX(0)';
+          });
         }, 200);
       } else {
         // Snap back
-        videoPanel.style.transform = 'translateX(0)';
+        panelContent.style.transform = 'translateX(0)';
       }
-    } else if (swipeDirection === 'vertical') {
-      const diffY = e.changedTouches[0].clientY - touchStartY;
-      if (diffY > 100) {
-        closePanel();
-      } else {
-        videoPanel.style.transform = 'translateY(0)';
-        videoPanel.style.opacity = '1';
-      }
-    }
 
-    isSwiping = false;
-    swipeDirection = null;
-  }, { passive: true });
+      isVideoSwiping = false;
+    }, { passive: true });
+  }
+
 });
