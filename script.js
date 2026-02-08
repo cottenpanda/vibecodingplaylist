@@ -290,7 +290,11 @@ document.addEventListener('DOMContentLoaded', () => {
     panelVideo.onerror = handleVideoError;
     source.onerror = handleVideoError;
 
-    // Open panel
+    // Open panel - save scroll position for mobile
+    if (!isPanelOpen) {
+      document.body.dataset.scrollY = window.scrollY;
+      document.body.style.top = `-${window.scrollY}px`;
+    }
     videoPanel.classList.add('active');
     document.body.classList.add('panel-open');
     isPanelOpen = true;
@@ -322,6 +326,12 @@ document.addEventListener('DOMContentLoaded', () => {
   function closePanel() {
     videoPanel.classList.remove('active');
     document.body.classList.remove('panel-open');
+
+    // Restore scroll position on mobile
+    const scrollY = document.body.dataset.scrollY || 0;
+    document.body.style.top = '';
+    window.scrollTo(0, parseInt(scrollY));
+
     isPanelOpen = false;
 
     // Stop video
@@ -566,7 +576,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Mobile swipe on VIDEO only to change tracks (Spotify-style)
-  const panelVideoBox = document.querySelector('.panel-video');
+  const panelVideoBox = document.getElementById('panelVideoContainer');
   let videoTouchStartX = 0;
   let videoTouchCurrentX = 0;
   let isVideoSwiping = false;
@@ -591,40 +601,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
     panelVideoBox.addEventListener('touchend', (e) => {
       if (!isVideoSwiping) return;
+      isVideoSwiping = false;
 
       const swipeThreshold = 60;
-      panelVideoBox.style.transition = 'transform 0.3s ease';
 
       if (videoTouchCurrentX > swipeThreshold && currentTrackIndex > 0) {
-        // Swipe right - previous track
+        // Swipe right - previous track: slide out right, new slides from left
+        panelVideoBox.style.transition = 'transform 0.25s ease-out';
         panelVideoBox.style.transform = 'translateX(100%)';
         setTimeout(() => {
+          openPanel(currentTrackIndex - 1);
           panelVideoBox.style.transition = 'none';
           panelVideoBox.style.transform = 'translateX(-100%)';
-          openPanel(currentTrackIndex - 1);
-          requestAnimationFrame(() => {
-            panelVideoBox.style.transition = 'transform 0.3s ease';
+          setTimeout(() => {
+            panelVideoBox.style.transition = 'transform 0.25s ease-out';
             panelVideoBox.style.transform = 'translateX(0)';
-          });
-        }, 200);
+          }, 20);
+        }, 250);
       } else if (videoTouchCurrentX < -swipeThreshold && currentTrackIndex < tracks.length - 1) {
-        // Swipe left - next track
+        // Swipe left - next track: slide out left, new slides from right
+        panelVideoBox.style.transition = 'transform 0.25s ease-out';
         panelVideoBox.style.transform = 'translateX(-100%)';
         setTimeout(() => {
+          openPanel(currentTrackIndex + 1);
           panelVideoBox.style.transition = 'none';
           panelVideoBox.style.transform = 'translateX(100%)';
-          openPanel(currentTrackIndex + 1);
-          requestAnimationFrame(() => {
-            panelVideoBox.style.transition = 'transform 0.3s ease';
+          setTimeout(() => {
+            panelVideoBox.style.transition = 'transform 0.25s ease-out';
             panelVideoBox.style.transform = 'translateX(0)';
-          });
-        }, 200);
+          }, 20);
+        }, 250);
       } else {
         // Snap back
+        panelVideoBox.style.transition = 'transform 0.2s ease-out';
         panelVideoBox.style.transform = 'translateX(0)';
       }
-
-      isVideoSwiping = false;
     }, { passive: true });
   }
 
