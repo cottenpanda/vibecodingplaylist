@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const playlistHeader = document.querySelector('.playlist-header');
 
   // Secret video popover
-  const artistName = document.querySelector('.artist-name');
+  const artistName = document.getElementById('artistName');
   const secretPopover = document.getElementById('secretPopover');
   const secretVideo = document.getElementById('secretVideo');
 

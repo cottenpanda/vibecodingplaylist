@@ -316,6 +316,7 @@ body {
   flex-direction: column;
   justify-content: flex-end;
   padding-bottom: 8px;
+  position: relative;
 }
 
 .playlist-label {
@@ -1247,11 +1248,6 @@ body.panel-open .panel-vinyl-drop {
 }
 
 /* Secret Video Popover */
-.artist-name-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
 .artist-name {
   cursor: pointer;
   transition: color 0.2s ease;
@@ -1263,9 +1259,9 @@ body.panel-open .panel-vinyl-drop {
 
 .secret-popover {
   position: absolute;
-  top: calc(100% + 12px);
-  left: 50%;
-  transform: translateX(-50%) scale(0.9);
+  top: 100%;
+  left: 0;
+  margin-top: 12px;
   width: 280px;
   border-radius: 12px;
   overflow: hidden;
@@ -1274,27 +1270,15 @@ body.panel-open .panel-vinyl-drop {
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
   opacity: 0;
   visibility: hidden;
+  transform: translateY(-10px);
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   z-index: 100;
-}
-
-.secret-popover::before {
-  content: '';
-  position: absolute;
-  top: -6px;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
-  width: 12px;
-  height: 12px;
-  background: var(--bg-elevated);
-  border-left: 1px solid rgba(255, 255, 255, 0.1);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .secret-popover.active {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) scale(1);
+  transform: translateY(0);
 }
 
 .secret-popover video {
