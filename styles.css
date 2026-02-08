@@ -1248,6 +1248,10 @@ body.panel-open .panel-vinyl-drop {
 }
 
 /* Secret Video Popover */
+.artist-name-wrap {
+  position: relative;
+}
+
 .artist-name {
   cursor: pointer;
   transition: color 0.2s ease;
@@ -1259,31 +1263,58 @@ body.panel-open .panel-vinyl-drop {
 
 .secret-popover {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 8px);
   left: 0;
-  margin-top: 12px;
-  width: 280px;
-  border-radius: 12px;
+  width: 400px;
+  border-radius: 16px;
   overflow: hidden;
   background: var(--bg-elevated);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-10px);
+  transform: translateY(-10px) scale(0.95);
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  z-index: 100;
+  z-index: 1000;
 }
 
 .secret-popover.active {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 .secret-popover video {
   width: 100%;
   display: block;
+}
+
+.secret-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.secret-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg) scale(1.1);
+}
+
+.secret-close svg {
+  width: 16px;
+  height: 16px;
 }
 
 /* Split layout when panel is open */

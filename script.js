@@ -151,6 +151,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const artistName = document.getElementById('artistName');
   const secretPopover = document.getElementById('secretPopover');
   const secretVideo = document.getElementById('secretVideo');
+  const secretClose = document.getElementById('secretClose');
+
+  function closeSecretPopover() {
+    secretPopover.classList.remove('active');
+    secretVideo.pause();
+    secretVideo.currentTime = 0;
+  }
 
   if (artistName && secretPopover) {
     artistName.addEventListener('click', (e) => {
@@ -159,17 +166,22 @@ document.addEventListener('DOMContentLoaded', () => {
       if (secretPopover.classList.contains('active')) {
         secretVideo.play();
       } else {
-        secretVideo.pause();
-        secretVideo.currentTime = 0;
+        closeSecretPopover();
       }
     });
+
+    // Close button
+    if (secretClose) {
+      secretClose.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeSecretPopover();
+      });
+    }
 
     // Close when clicking outside
     document.addEventListener('click', (e) => {
       if (!secretPopover.contains(e.target) && !artistName.contains(e.target)) {
-        secretPopover.classList.remove('active');
-        secretVideo.pause();
-        secretVideo.currentTime = 0;
+        closeSecretPopover();
       }
     });
   }
