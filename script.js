@@ -534,7 +534,8 @@ document.addEventListener('DOMContentLoaded', () => {
   nextBtn.addEventListener('click', () => {
     if (currentTrackIndex < tracks.length - 1) {
       openPanel(currentTrackIndex + 1);
-    } else if (!isPanelOpen && tracks.length > 0) {
+    } else {
+      // Loop back to first track
       openPanel(0);
     }
   });
