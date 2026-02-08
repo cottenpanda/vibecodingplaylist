@@ -1093,7 +1093,6 @@ body.panel-open .panel-vinyl-drop {
   flex-direction: column;
   padding: 60px 40px 40px;
   overflow-y: auto;
-  will-change: transform;
 }
 
 .panel-video {
@@ -1103,6 +1102,7 @@ body.panel-open .panel-vinyl-drop {
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 32px;
+  will-change: transform;
 }
 
 .panel-video video {

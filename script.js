@@ -565,66 +565,63 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Mobile swipe on video content (not panel) to change tracks
-  const panelContent = document.querySelector('.panel-content');
+  // Mobile swipe on VIDEO only to change tracks (Spotify-style)
+  const panelVideoBox = document.querySelector('.panel-video');
   let videoTouchStartX = 0;
   let videoTouchCurrentX = 0;
   let isVideoSwiping = false;
 
-  if (panelContent) {
-    panelContent.addEventListener('touchstart', (e) => {
-      // Don't interfere with progress bar
-      if (e.target.closest('.panel-progress-bar')) return;
-
+  if (panelVideoBox) {
+    panelVideoBox.addEventListener('touchstart', (e) => {
       videoTouchStartX = e.touches[0].clientX;
       videoTouchCurrentX = 0;
       isVideoSwiping = true;
-      panelContent.style.transition = 'none';
+      panelVideoBox.style.transition = 'none';
     }, { passive: true });
 
-    panelContent.addEventListener('touchmove', (e) => {
-      if (!isVideoSwiping || e.target.closest('.panel-progress-bar')) return;
+    panelVideoBox.addEventListener('touchmove', (e) => {
+      if (!isVideoSwiping) return;
 
-      e.preventDefault(); // Prevent background scroll
+      e.preventDefault();
       const touchX = e.touches[0].clientX;
       const diffX = touchX - videoTouchStartX;
-      videoTouchCurrentX = diffX * 0.5; // Resistance
-      panelContent.style.transform = `translateX(${videoTouchCurrentX}px)`;
+      videoTouchCurrentX = diffX * 0.5;
+      panelVideoBox.style.transform = `translateX(${videoTouchCurrentX}px)`;
     }, { passive: false });
 
-    panelContent.addEventListener('touchend', (e) => {
+    panelVideoBox.addEventListener('touchend', (e) => {
       if (!isVideoSwiping) return;
 
       const swipeThreshold = 60;
-      panelContent.style.transition = 'transform 0.3s ease';
+      panelVideoBox.style.transition = 'transform 0.3s ease';
 
       if (videoTouchCurrentX > swipeThreshold && currentTrackIndex > 0) {
         // Swipe right - previous track
-        panelContent.style.transform = 'translateX(100%)';
+        panelVideoBox.style.transform = 'translateX(100%)';
         setTimeout(() => {
-          panelContent.style.transition = 'none';
-          panelContent.style.transform = 'translateX(-100%)';
+          panelVideoBox.style.transition = 'none';
+          panelVideoBox.style.transform = 'translateX(-100%)';
           openPanel(currentTrackIndex - 1);
           requestAnimationFrame(() => {
-            panelContent.style.transition = 'transform 0.3s ease';
-            panelContent.style.transform = 'translateX(0)';
+            panelVideoBox.style.transition = 'transform 0.3s ease';
+            panelVideoBox.style.transform = 'translateX(0)';
           });
         }, 200);
       } else if (videoTouchCurrentX < -swipeThreshold && currentTrackIndex < tracks.length - 1) {
         // Swipe left - next track
-        panelContent.style.transform = 'translateX(-100%)';
+        panelVideoBox.style.transform = 'translateX(-100%)';
         setTimeout(() => {
-          panelContent.style.transition = 'none';
-          panelContent.style.transform = 'translateX(100%)';
+          panelVideoBox.style.transition = 'none';
+          panelVideoBox.style.transform = 'translateX(100%)';
           openPanel(currentTrackIndex + 1);
           requestAnimationFrame(() => {
-            panelContent.style.transition = 'transform 0.3s ease';
-            panelContent.style.transform = 'translateX(0)';
+            panelVideoBox.style.transition = 'transform 0.3s ease';
+            panelVideoBox.style.transform = 'translateX(0)';
           });
         }, 200);
       } else {
         // Snap back
-        panelContent.style.transform = 'translateX(0)';
+        panelVideoBox.style.transform = 'translateX(0)';
       }
 
       isVideoSwiping = false;
