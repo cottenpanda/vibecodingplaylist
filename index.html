@@ -392,11 +392,13 @@
         <path d="M18 6L6 18M6 6l12 12"/>
       </svg>
     </button>
-    <div class="panel-content">
+    <div class="panel-content" id="panelContent">
       <div class="panel-video" id="panelVideoContainer">
-        <video id="panelVideo" playsinline>
-          <source src="" type="video/mp4">
-        </video>
+        <div class="video-slider" id="videoSlider">
+          <video id="panelVideo" playsinline>
+            <source src="" type="video/mp4">
+          </video>
+        </div>
         <div class="video-swipe-overlay" id="videoSwipeOverlay"></div>
       </div>
       <div class="panel-info">

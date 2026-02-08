@@ -174,13 +174,19 @@ document.addEventListener('DOMContentLoaded', () => {
     artistName.addEventListener('click', (e) => {
       e.stopPropagation();
 
-      // Position popover directly below yanliudesign
-      const rect = artistName.getBoundingClientRect();
-      const playlistInfo = document.querySelector('.playlist-info');
-      const infoRect = playlistInfo.getBoundingClientRect();
-
-      secretPopover.style.top = (rect.bottom - infoRect.top + 8) + 'px';
-      secretPopover.style.left = (rect.left - infoRect.left) + 'px';
+      // Position popover directly below yanliudesign (desktop only)
+      // On mobile, CSS handles centering with position: fixed
+      if (window.innerWidth > 600) {
+        const rect = artistName.getBoundingClientRect();
+        const playlistInfo = document.querySelector('.playlist-info');
+        const infoRect = playlistInfo.getBoundingClientRect();
+        secretPopover.style.top = (rect.bottom - infoRect.top + 8) + 'px';
+        secretPopover.style.left = (rect.left - infoRect.left) + 'px';
+      } else {
+        // Clear inline styles for mobile so CSS takes over
+        secretPopover.style.top = '';
+        secretPopover.style.left = '';
+      }
 
       secretPopover.classList.toggle('active');
       if (secretPopover.classList.contains('active')) {
@@ -266,11 +272,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (existingIframe) existingIframe.remove();
     panelVideo.style.display = 'block';
 
-    // Try local video first, fallback to Cloudinary, then YouTube
-    panelVideo.querySelector('source').setAttribute('src', video);
-    panelVideo.load();
+    // Reset video slider transform (in case of leftover from swipe)
+    const slider = document.getElementById('videoSlider');
+    if (slider) {
+      slider.style.transition = 'none';
+      slider.style.transform = 'translateX(0)';
+    }
 
-    // Handle video loading errors with fallback chain
+    // Try local video first, fallback to Cloudinary, then YouTube
     const source = panelVideo.querySelector('source');
     let triedCloudinary = false;
 
@@ -279,9 +288,6 @@ document.addEventListener('DOMContentLoaded', () => {
         triedCloudinary = true;
         source.setAttribute('src', cloudinaryUrl);
         panelVideo.load();
-        panelVideo.play().catch(() => {
-          if (youtubeId) loadYouTube(youtubeId);
-        });
       } else if (youtubeId) {
         loadYouTube(youtubeId);
       }
@@ -289,6 +295,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     panelVideo.onerror = handleVideoError;
     source.onerror = handleVideoError;
+
+    // Play when video is ready
+    panelVideo.oncanplay = () => {
+      panelVideo.currentTime = 0;
+      panelVideo.play().catch(() => {
+        if (youtubeId && !isYouTube) {
+          loadYouTube(youtubeId);
+        }
+      });
+    };
+
+    source.setAttribute('src', video);
+    panelVideo.load();
 
     // Open panel - save scroll position for mobile
     if (!isPanelOpen) {
@@ -310,13 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update ambient colors
     updateAmbientColors(index);
 
-    // Auto play
-    panelVideo.play().catch(() => {
-      // If play fails and we have YouTube, use it
-      if (youtubeId && !isYouTube) {
-        loadYouTube(youtubeId);
-      }
-    });
+    // Set playing state immediately
     isPlaying = true;
     panelPlayBtn.classList.add('playing');
     playPauseBtn.classList.add('playing');
@@ -575,29 +588,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Mobile swipe on VIDEO only to change tracks (Spotify-style)
-  const panelVideoBox = document.getElementById('panelVideoContainer');
+  // Mobile swipe on video to change tracks
+  const videoSlider = document.getElementById('videoSlider');
   const videoSwipeOverlay = document.getElementById('videoSwipeOverlay');
   let videoTouchStartX = 0;
   let videoTouchCurrentX = 0;
   let isVideoSwiping = false;
 
-  if (videoSwipeOverlay && panelVideoBox) {
+  if (videoSwipeOverlay && videoSlider) {
     videoSwipeOverlay.addEventListener('touchstart', (e) => {
       videoTouchStartX = e.touches[0].clientX;
       videoTouchCurrentX = 0;
       isVideoSwiping = true;
-      panelVideoBox.style.transition = 'none';
+      videoSlider.style.transition = 'none';
     }, { passive: true });
 
     videoSwipeOverlay.addEventListener('touchmove', (e) => {
       if (!isVideoSwiping) return;
-
       e.preventDefault();
       const touchX = e.touches[0].clientX;
       const diffX = touchX - videoTouchStartX;
       videoTouchCurrentX = diffX;
-      panelVideoBox.style.transform = `translateX(${videoTouchCurrentX * 0.5}px)`;
+      videoSlider.style.transform = `translateX(${videoTouchCurrentX * 0.5}px)`;
     }, { passive: false });
 
     videoSwipeOverlay.addEventListener('touchend', (e) => {
@@ -607,45 +619,47 @@ document.addEventListener('DOMContentLoaded', () => {
       const swipeThreshold = 50;
 
       if (videoTouchCurrentX > swipeThreshold && currentTrackIndex > 0) {
-        // Swipe right - previous track: slide out right, new slides from left
-        panelVideoBox.style.transition = 'transform 0.3s ease-out';
-        panelVideoBox.style.transform = 'translateX(100%)';
+        // Swipe right - previous track
+        const nextIndex = currentTrackIndex - 1;
+        videoSlider.style.transition = 'transform 0.3s ease-out';
+        videoSlider.style.transform = 'translateX(100%)';
+
         setTimeout(() => {
-          // Load new track
-          openPanel(currentTrackIndex - 1);
-          // Position off-screen left (instant, no transition)
-          panelVideoBox.style.transition = 'none';
-          panelVideoBox.style.transform = 'translateX(-100%)';
-          // Force browser to paint, then animate in
+          openPanel(nextIndex);
+          // Re-apply off-screen position after openPanel resets it
+          videoSlider.style.transition = 'none';
+          videoSlider.style.transform = 'translateX(-100%)';
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
-              panelVideoBox.style.transition = 'transform 0.3s ease-out';
-              panelVideoBox.style.transform = 'translateX(0)';
+              videoSlider.style.transition = 'transform 0.3s ease-out';
+              videoSlider.style.transform = 'translateX(0)';
             });
           });
         }, 300);
+
       } else if (videoTouchCurrentX < -swipeThreshold && currentTrackIndex < tracks.length - 1) {
-        // Swipe left - next track: slide out left, new slides from right
-        panelVideoBox.style.transition = 'transform 0.3s ease-out';
-        panelVideoBox.style.transform = 'translateX(-100%)';
+        // Swipe left - next track
+        const nextIndex = currentTrackIndex + 1;
+        videoSlider.style.transition = 'transform 0.3s ease-out';
+        videoSlider.style.transform = 'translateX(-100%)';
+
         setTimeout(() => {
-          // Load new track
-          openPanel(currentTrackIndex + 1);
-          // Position off-screen right (instant, no transition)
-          panelVideoBox.style.transition = 'none';
-          panelVideoBox.style.transform = 'translateX(100%)';
-          // Force browser to paint, then animate in
+          openPanel(nextIndex);
+          // Re-apply off-screen position after openPanel resets it
+          videoSlider.style.transition = 'none';
+          videoSlider.style.transform = 'translateX(100%)';
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
-              panelVideoBox.style.transition = 'transform 0.3s ease-out';
-              panelVideoBox.style.transform = 'translateX(0)';
+              videoSlider.style.transition = 'transform 0.3s ease-out';
+              videoSlider.style.transform = 'translateX(0)';
             });
           });
         }, 300);
+
       } else {
         // Snap back
-        panelVideoBox.style.transition = 'transform 0.2s ease-out';
-        panelVideoBox.style.transform = 'translateX(0)';
+        videoSlider.style.transition = 'transform 0.2s ease-out';
+        videoSlider.style.transform = 'translateX(0)';
       }
     }, { passive: true });
   }
