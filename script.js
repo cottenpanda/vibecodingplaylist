@@ -577,19 +577,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Mobile swipe on VIDEO only to change tracks (Spotify-style)
   const panelVideoBox = document.getElementById('panelVideoContainer');
+  const videoSwipeOverlay = document.getElementById('videoSwipeOverlay');
   let videoTouchStartX = 0;
   let videoTouchCurrentX = 0;
   let isVideoSwiping = false;
 
-  if (panelVideoBox) {
-    panelVideoBox.addEventListener('touchstart', (e) => {
+  if (videoSwipeOverlay && panelVideoBox) {
+    videoSwipeOverlay.addEventListener('touchstart', (e) => {
       videoTouchStartX = e.touches[0].clientX;
       videoTouchCurrentX = 0;
       isVideoSwiping = true;
       panelVideoBox.style.transition = 'none';
     }, { passive: true });
 
-    panelVideoBox.addEventListener('touchmove', (e) => {
+    videoSwipeOverlay.addEventListener('touchmove', (e) => {
       if (!isVideoSwiping) return;
 
       e.preventDefault();
@@ -599,7 +600,7 @@ document.addEventListener('DOMContentLoaded', () => {
       panelVideoBox.style.transform = `translateX(${videoTouchCurrentX}px)`;
     }, { passive: false });
 
-    panelVideoBox.addEventListener('touchend', (e) => {
+    videoSwipeOverlay.addEventListener('touchend', (e) => {
       if (!isVideoSwiping) return;
       isVideoSwiping = false;
 
