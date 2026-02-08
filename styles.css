@@ -925,8 +925,8 @@ body {
   position: fixed;
   top: 16px;
   right: 16px;
-  bottom: 106px;
   width: calc(50% - 32px);
+  height: calc(100vh - 32px);
   background:
     linear-gradient(
       160deg,
