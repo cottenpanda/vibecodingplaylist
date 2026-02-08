@@ -1319,9 +1319,9 @@ body.panel-open .panel-vinyl-drop {
 }
 
 .secret-message {
-  color: var(--white);
+  color: #b3b3b3;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   text-align: center;
   padding: 16px 20px;
   line-height: 1.5;
