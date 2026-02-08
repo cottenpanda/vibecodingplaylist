@@ -607,30 +607,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (videoTouchCurrentX > swipeThreshold && currentTrackIndex > 0) {
         // Swipe right - previous track: slide out right, new slides from left
-        panelVideoBox.style.transition = 'transform 0.25s ease-out';
+        panelVideoBox.style.transition = 'transform 0.3s ease-out';
         panelVideoBox.style.transform = 'translateX(100%)';
         setTimeout(() => {
+          // Load new track
           openPanel(currentTrackIndex - 1);
+          // Position off-screen left (instant, no transition)
           panelVideoBox.style.transition = 'none';
           panelVideoBox.style.transform = 'translateX(-100%)';
-          setTimeout(() => {
-            panelVideoBox.style.transition = 'transform 0.25s ease-out';
-            panelVideoBox.style.transform = 'translateX(0)';
-          }, 20);
-        }, 250);
+          // Force browser to paint, then animate in
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              panelVideoBox.style.transition = 'transform 0.3s ease-out';
+              panelVideoBox.style.transform = 'translateX(0)';
+            });
+          });
+        }, 300);
       } else if (videoTouchCurrentX < -swipeThreshold && currentTrackIndex < tracks.length - 1) {
         // Swipe left - next track: slide out left, new slides from right
-        panelVideoBox.style.transition = 'transform 0.25s ease-out';
+        panelVideoBox.style.transition = 'transform 0.3s ease-out';
         panelVideoBox.style.transform = 'translateX(-100%)';
         setTimeout(() => {
+          // Load new track
           openPanel(currentTrackIndex + 1);
+          // Position off-screen right (instant, no transition)
           panelVideoBox.style.transition = 'none';
           panelVideoBox.style.transform = 'translateX(100%)';
-          setTimeout(() => {
-            panelVideoBox.style.transition = 'transform 0.25s ease-out';
-            panelVideoBox.style.transform = 'translateX(0)';
-          }, 20);
-        }, 250);
+          // Force browser to paint, then animate in
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              panelVideoBox.style.transition = 'transform 0.3s ease-out';
+              panelVideoBox.style.transform = 'translateX(0)';
+            });
+          });
+        }, 300);
       } else {
         // Snap back
         panelVideoBox.style.transition = 'transform 0.2s ease-out';
