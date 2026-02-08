@@ -1103,6 +1103,7 @@ body.panel-open .panel-vinyl-drop {
   overflow: hidden;
   margin-bottom: 32px;
   will-change: transform;
+  touch-action: pan-y;
 }
 
 .panel-video video {
@@ -1110,6 +1111,7 @@ body.panel-open .panel-vinyl-drop {
   height: 100%;
   object-fit: contain;
   background: var(--bg);
+  pointer-events: none;
 }
 
 .panel-video iframe {
