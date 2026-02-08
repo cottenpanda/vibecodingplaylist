@@ -327,7 +327,7 @@ body {
 }
 
 .playlist-title {
-  font-size: clamp(48px, 10vw, 96px);
+  font-size: 96px;
   font-weight: 900;
   letter-spacing: -3px;
   line-height: 1;
