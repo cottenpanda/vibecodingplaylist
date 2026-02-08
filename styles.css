@@ -779,17 +779,25 @@ body {
 .now-playing-text {
   display: flex;
   flex-direction: column;
+  min-width: 0;
+  max-width: 200px;
 }
 
 .now-playing-title {
   font-size: 14px;
   font-weight: 500;
   color: var(--white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .now-playing-artist {
   font-size: 12px;
   color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .now-playing-controls {
