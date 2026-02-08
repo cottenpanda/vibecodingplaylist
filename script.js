@@ -412,8 +412,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Video progress update
+  let isSeeking = false;
+
   panelVideo.addEventListener('timeupdate', () => {
-    if (panelVideo.duration) {
+    if (panelVideo.duration && !isSeeking) {
       const percent = (panelVideo.currentTime / panelVideo.duration) * 100;
       panelProgressFill.style.width = percent + '%';
       progressFill.style.width = percent + '%';
@@ -431,11 +433,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Seekable progress bar
-  panelProgressBar.addEventListener('click', (e) => {
-    const rect = panelProgressBar.getBoundingClientRect();
-    const percent = (e.clientX - rect.left) / rect.width;
-    panelVideo.currentTime = percent * panelVideo.duration;
+  // Seekable progress bar with drag support
+  function seekToPosition(e, progressBar) {
+    const rect = progressBar.getBoundingClientRect();
+    const percent = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    if (panelVideo.duration) {
+      panelVideo.currentTime = percent * panelVideo.duration;
+      panelProgressFill.style.width = (percent * 100) + '%';
+      progressFill.style.width = (percent * 100) + '%';
+      panelCurrentTime.textContent = formatTime(panelVideo.currentTime);
+    }
+  }
+
+  panelProgressBar.addEventListener('mousedown', (e) => {
+    isSeeking = true;
+    seekToPosition(e, panelProgressBar);
+
+    const onMouseMove = (e) => seekToPosition(e, panelProgressBar);
+    const onMouseUp = () => {
+      isSeeking = false;
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
+
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+  });
+
+  // Touch support for mobile
+  panelProgressBar.addEventListener('touchstart', (e) => {
+    isSeeking = true;
+    const touch = e.touches[0];
+    seekToPosition({ clientX: touch.clientX }, panelProgressBar);
+  }, { passive: true });
+
+  panelProgressBar.addEventListener('touchmove', (e) => {
+    if (isSeeking) {
+      const touch = e.touches[0];
+      seekToPosition({ clientX: touch.clientX }, panelProgressBar);
+    }
+  }, { passive: true });
+
+  panelProgressBar.addEventListener('touchend', () => {
+    isSeeking = false;
   });
 
   // Format time helper
