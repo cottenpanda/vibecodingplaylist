@@ -697,6 +697,7 @@ body {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 24px;
   z-index: 100;
   transition: transform 0.4s ease, opacity 0.4s ease;
@@ -1481,13 +1482,11 @@ body.panel-open .track-expanded {
     grid-template-columns: 1fr;
   }
 
-  /* Medium screens: full-width panel */
+  /* Medium screens: full-width panel, hide now-playing when open */
   .video-panel {
     width: calc(100% - 32px);
-    height: calc(100vh - 122px);
   }
 
-  /* Hide now-playing bar when panel is open on medium screens */
   body.panel-open .now-playing {
     transform: translateY(100%);
     opacity: 0;
