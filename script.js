@@ -596,15 +596,15 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       const touchX = e.touches[0].clientX;
       const diffX = touchX - videoTouchStartX;
-      videoTouchCurrentX = diffX * 0.5;
-      panelVideoBox.style.transform = `translateX(${videoTouchCurrentX}px)`;
+      videoTouchCurrentX = diffX;
+      panelVideoBox.style.transform = `translateX(${videoTouchCurrentX * 0.5}px)`;
     }, { passive: false });
 
     videoSwipeOverlay.addEventListener('touchend', (e) => {
       if (!isVideoSwiping) return;
       isVideoSwiping = false;
 
-      const swipeThreshold = 60;
+      const swipeThreshold = 50;
 
       if (videoTouchCurrentX > swipeThreshold && currentTrackIndex > 0) {
         // Swipe right - previous track: slide out right, new slides from left
