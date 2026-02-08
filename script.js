@@ -296,15 +296,20 @@ document.addEventListener('DOMContentLoaded', () => {
     panelVideo.onerror = handleVideoError;
     source.onerror = handleVideoError;
 
-    // Play when video is ready
-    panelVideo.oncanplay = () => {
-      panelVideo.currentTime = 0;
-      panelVideo.play().catch(() => {
+    // Auto play when video is ready
+    const playWhenReady = () => {
+      panelVideo.play().then(() => {
+        isPlaying = true;
+        panelPlayBtn.classList.add('playing');
+        playPauseBtn.classList.add('playing');
+      }).catch(() => {
         if (youtubeId && !isYouTube) {
           loadYouTube(youtubeId);
         }
       });
+      panelVideo.removeEventListener('loadeddata', playWhenReady);
     };
+    panelVideo.addEventListener('loadeddata', playWhenReady);
 
     source.setAttribute('src', video);
     panelVideo.load();
@@ -328,11 +333,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update ambient colors
     updateAmbientColors(index);
-
-    // Set playing state immediately
-    isPlaying = true;
-    panelPlayBtn.classList.add('playing');
-    playPauseBtn.classList.add('playing');
   }
 
   // Close panel
