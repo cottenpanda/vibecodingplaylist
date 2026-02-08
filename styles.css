@@ -701,6 +701,7 @@ body {
   align-items: center;
   padding: 0 24px;
   z-index: 100;
+  transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
 .now-playing-info {
@@ -1355,9 +1356,9 @@ body.panel-open .playlist-container {
 }
 
 body.panel-open .now-playing {
-  width: 50%;
-  left: 0;
-  right: auto;
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .playlist-header {
