@@ -153,6 +153,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const secretVideo = document.getElementById('secretVideo');
   const secretClose = document.getElementById('secretClose');
 
+  // Cloudinary fallback for secret video
+  if (secretVideo) {
+    secretVideo.addEventListener('error', () => {
+      const cloudinaryUrl = secretVideo.dataset.cloudinary;
+      if (cloudinaryUrl && secretVideo.src !== cloudinaryUrl) {
+        secretVideo.src = cloudinaryUrl;
+        secretVideo.load();
+      }
+    }, true);
+  }
+
   function closeSecretPopover() {
     secretPopover.classList.remove('active');
     secretVideo.pause();
