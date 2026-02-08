@@ -1620,6 +1620,20 @@ body.panel-open .track-expanded {
     display: none;
   }
 
+  /* Secret popover - center on mobile */
+  .secret-popover {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    width: calc(100vw - 32px);
+    max-width: 350px;
+  }
+
+  .secret-popover.active {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
   /* Hide now-playing bar when panel is open on mobile */
   body.panel-open .now-playing {
     transform: translateY(100%);
