@@ -1496,6 +1496,13 @@ body.panel-open .track-expanded {
 }
 
 @media (max-width: 600px) {
+  /* Lock scroll when panel open on mobile */
+  body.panel-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+
   .cover-art {
     width: 160px;
     height: 160px;

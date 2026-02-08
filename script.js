@@ -585,11 +585,12 @@ document.addEventListener('DOMContentLoaded', () => {
     panelContent.addEventListener('touchmove', (e) => {
       if (!isVideoSwiping || e.target.closest('.panel-progress-bar')) return;
 
+      e.preventDefault(); // Prevent background scroll
       const touchX = e.touches[0].clientX;
       const diffX = touchX - videoTouchStartX;
       videoTouchCurrentX = diffX * 0.5; // Resistance
       panelContent.style.transform = `translateX(${videoTouchCurrentX}px)`;
-    }, { passive: true });
+    }, { passive: false });
 
     panelContent.addEventListener('touchend', (e) => {
       if (!isVideoSwiping) return;
