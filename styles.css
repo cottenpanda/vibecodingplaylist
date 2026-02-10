@@ -1153,11 +1153,9 @@ body.panel-open .panel-vinyl-drop {
 }
 
 .panel-title-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
+  position: relative;
   margin-bottom: 8px;
+  padding-right: 90px;
 }
 
 .panel-title {
@@ -1165,8 +1163,6 @@ body.panel-open .panel-vinyl-drop {
   font-weight: 700;
   color: var(--white);
   margin-bottom: 0;
-  flex: 1;
-  min-width: 0;
 }
 
 #tryItBtn {
@@ -1174,6 +1170,11 @@ body.panel-open .panel-vinyl-drop {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
   padding: 8px 16px;
   background: transparent;
   background-color: transparent;
@@ -1185,13 +1186,10 @@ body.panel-open .panel-vinyl-drop {
   font-weight: 500;
   white-space: nowrap;
   cursor: pointer;
-  flex-shrink: 0;
   outline: none;
   text-decoration: none;
   box-sizing: border-box;
   line-height: 1.2;
-  vertical-align: middle;
-  align-self: center;
 }
 
 #tryItBtn:hover,
@@ -1646,8 +1644,7 @@ body.panel-open .track-expanded {
   }
 
   .panel-title-row {
-    gap: 12px;
-    align-items: center;
+    padding-right: 80px;
   }
 
   #tryItBtn {

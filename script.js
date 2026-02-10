@@ -275,16 +275,11 @@ document.addEventListener('DOMContentLoaded', () => {
         tryItBtn.dataset.url = demoUrl;
         tryItBtn.classList.add('visible');
         // Inline styles as fallback for Google App Browser
-        tryItBtn.style.display = 'block';
-        tryItBtn.style.color = '#1DB954';
-        tryItBtn.style.backgroundColor = 'transparent';
-        tryItBtn.style.border = '1px solid #1DB954';
-        tryItBtn.style.borderRadius = '20px';
-        tryItBtn.style.textDecoration = 'none';
+        tryItBtn.style.cssText = 'display: block; position: absolute; right: 0; top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-50%); padding: 6px 14px; color: #1DB954; background: transparent; border: 1px solid #1DB954; border-radius: 20px; text-decoration: none; font-size: 13px; white-space: nowrap;';
       } else {
         tryItBtn.dataset.url = '';
         tryItBtn.classList.remove('visible');
-        tryItBtn.style.display = 'none';
+        tryItBtn.style.cssText = 'display: none;';
       }
     }
 
