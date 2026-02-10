@@ -445,7 +445,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (panelVideo.duration && !isSeeking) {
       const percent = (panelVideo.currentTime / panelVideo.duration) * 100;
       panelProgressFill.style.width = percent + '%';
-      progressFill.style.width = percent + '%';
+      if (progressFill) progressFill.style.width = percent + '%';
       panelCurrentTime.textContent = formatTime(panelVideo.currentTime);
     }
   });
@@ -517,13 +517,13 @@ document.addEventListener('DOMContentLoaded', () => {
     if (data) {
       nowPlayingTitle.textContent = data.title;
       nowPlayingArtist.textContent = data.artist;
-      totalTimeEl.textContent = data.duration;
+      if (totalTimeEl) totalTimeEl.textContent = data.duration;
       nowPlayingThumb.classList.add('playing');
     } else {
       nowPlayingTitle.textContent = 'Select a track';
       nowPlayingArtist.textContent = '—';
-      totalTimeEl.textContent = '0:00';
-      progressFill.style.width = '0%';
+      if (totalTimeEl) totalTimeEl.textContent = '0:00';
+      if (progressFill) progressFill.style.width = '0%';
       nowPlayingThumb.classList.remove('playing');
     }
   }
