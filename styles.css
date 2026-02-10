@@ -1634,7 +1634,7 @@ body.panel-open .track-expanded {
   .panel-desc {
     font-size: 14px;
     flex: 0;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
   }
 
   .panel-title-row {
