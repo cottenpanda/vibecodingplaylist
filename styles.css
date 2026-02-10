@@ -1168,36 +1168,33 @@ body.panel-open .panel-vinyl-drop {
   flex: 1;
 }
 
-a.try-it-btn,
-a.try-it-btn:link,
-a.try-it-btn:visited {
+#tryItBtn {
+  all: unset;
   display: none;
   padding: 8px 16px;
   background: transparent;
   border: 1px solid var(--green);
   border-radius: 20px;
-  color: var(--green) !important;
+  color: var(--green);
   font-size: 14px;
   font-weight: 500;
-  text-decoration: none !important;
+  text-decoration: none;
   white-space: nowrap;
+  cursor: pointer;
   transition: all 0.2s ease;
   flex-shrink: 0;
-  -webkit-appearance: none;
-  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
 }
 
-a.try-it-btn:hover,
-a.try-it-btn:active,
-a.try-it-btn:focus {
+#tryItBtn:hover,
+#tryItBtn:active,
+#tryItBtn:focus {
   background: var(--green);
-  color: var(--bg) !important;
-  text-decoration: none !important;
+  color: var(--bg);
+  text-decoration: none;
 }
 
-a.try-it-btn.visible,
-a.try-it-btn.visible:link,
-a.try-it-btn.visible:visited {
+#tryItBtn.visible {
   display: inline-block;
 }
 
@@ -1637,7 +1634,7 @@ body.panel-open .track-expanded {
     gap: 8px;
   }
 
-  .try-it-btn {
+  #tryItBtn {
     padding: 6px 14px;
     font-size: 13px;
   }
