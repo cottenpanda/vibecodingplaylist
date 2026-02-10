@@ -373,6 +373,10 @@ body {
   max-width: 500px;
 }
 
+.mobile-break {
+  display: none;
+}
+
 .playlist-actions {
   display: flex;
   align-items: center;
@@ -1585,6 +1589,10 @@ body.panel-open .track-expanded {
   .playlist-title {
     font-size: 36px;
     letter-spacing: -1px;
+  }
+
+  .mobile-break {
+    display: block;
   }
 
   .playlist-container {
