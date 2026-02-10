@@ -1614,6 +1614,11 @@ body.panel-open .track-expanded {
     left: 0;
   }
 
+  /* Hide pink star when panel is open on mobile */
+  body.panel-open .scribble-star {
+    display: none;
+  }
+
   /* Panel content adjustments */
   .panel-content {
     padding: 50px 20px 16px;
