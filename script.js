@@ -271,9 +271,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle "Try it" button
     const demoUrl = track.getAttribute('data-demo');
     if (demoUrl && tryItBtn) {
-      tryItBtn.href = demoUrl;
+      tryItBtn.dataset.url = demoUrl;
       tryItBtn.classList.add('visible');
     } else if (tryItBtn) {
+      tryItBtn.dataset.url = '';
       tryItBtn.classList.remove('visible');
     }
 
@@ -414,6 +415,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Close button
   panelClose.addEventListener('click', closePanel);
+
+  // Try it button click
+  if (tryItBtn) {
+    tryItBtn.addEventListener('click', () => {
+      const url = tryItBtn.dataset.url;
+      if (url) {
+        window.open(url, '_blank');
+      }
+    });
+  }
 
   // Panel play/pause
   panelPlayBtn.addEventListener('click', () => {
