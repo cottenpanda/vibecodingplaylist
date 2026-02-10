@@ -1616,15 +1616,25 @@ body.panel-open .track-expanded {
 
   /* Panel content adjustments */
   .panel-content {
-    padding: 60px 20px 20px;
+    padding: 50px 20px 16px;
+  }
+
+  .panel-video {
+    margin-bottom: 16px;
   }
 
   .panel-title {
-    font-size: 28px;
+    font-size: 24px;
+  }
+
+  .panel-artist {
+    margin-bottom: 10px;
   }
 
   .panel-desc {
     font-size: 14px;
+    flex: 0;
+    margin-bottom: 16px;
   }
 
   .panel-title-row {
