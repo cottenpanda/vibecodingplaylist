@@ -1168,7 +1168,9 @@ body.panel-open .panel-vinyl-drop {
   flex: 1;
 }
 
-.try-it-btn {
+a.try-it-btn,
+a.try-it-btn:link,
+a.try-it-btn:visited {
   display: none;
   padding: 8px 16px;
   background: transparent;
@@ -1185,18 +1187,17 @@ body.panel-open .panel-vinyl-drop {
   -webkit-tap-highlight-color: transparent;
 }
 
-.try-it-btn:hover,
-.try-it-btn:active {
+a.try-it-btn:hover,
+a.try-it-btn:active,
+a.try-it-btn:focus {
   background: var(--green);
   color: var(--bg) !important;
   text-decoration: none !important;
 }
 
-.try-it-btn:visited {
-  color: var(--green) !important;
-}
-
-.try-it-btn.visible {
+a.try-it-btn.visible,
+a.try-it-btn.visible:link,
+a.try-it-btn.visible:visited {
   display: inline-block;
 }
 
