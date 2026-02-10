@@ -498,7 +498,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (panelVideo.duration) {
       panelVideo.currentTime = percent * panelVideo.duration;
       panelProgressFill.style.width = (percent * 100) + '%';
-      progressFill.style.width = (percent * 100) + '%';
+      if (progressFill) progressFill.style.width = (percent * 100) + '%';
       panelCurrentTime.textContent = formatTime(panelVideo.currentTime);
     }
   }
