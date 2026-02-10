@@ -1494,8 +1494,7 @@ body.panel-open .playlist-actions {
 }
 
 body.panel-open .scribble-star {
-  opacity: 1;
-  z-index: 60;
+  display: none;
 }
 
 body.panel-open .track-expanded {
@@ -1612,11 +1611,6 @@ body.panel-open .track-expanded {
   body.panel-open .now-playing {
     width: 100%;
     left: 0;
-  }
-
-  /* Hide pink star when panel is open on mobile */
-  body.panel-open .scribble-star {
-    display: none;
   }
 
   /* Panel content adjustments */
