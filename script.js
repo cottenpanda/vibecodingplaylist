@@ -275,7 +275,9 @@ document.addEventListener('DOMContentLoaded', () => {
         tryItBtn.dataset.url = demoUrl;
         tryItBtn.classList.add('visible');
         // Inline styles as fallback for Google App Browser
-        tryItBtn.style.cssText = 'display: block; position: absolute; right: 20px; top: 4px; padding: 6px 14px; color: #1DB954; background: transparent; border: 1px solid #1DB954; border-radius: 20px; text-decoration: none; font-size: 13px; white-space: nowrap;';
+        tryItBtn.style.cssText = 'display: inline-block; padding: 6px 14px; margin-left: 12px; color: #1DB954; background: transparent; border: 1px solid #1DB954; border-radius: 20px; text-decoration: none; font-size: 13px; white-space: nowrap; vertical-align: middle;';
+        // Also force the title to be inline
+        panelTitle.style.display = 'inline';
       } else {
         tryItBtn.dataset.url = '';
         tryItBtn.classList.remove('visible');

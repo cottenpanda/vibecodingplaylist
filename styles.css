@@ -1153,9 +1153,7 @@ body.panel-open .panel-vinyl-drop {
 }
 
 .panel-title-row {
-  position: relative;
   margin-bottom: 8px;
-  padding-right: 90px;
 }
 
 .panel-title {
@@ -1163,6 +1161,7 @@ body.panel-open .panel-vinyl-drop {
   font-weight: 700;
   color: var(--white);
   margin-bottom: 0;
+  display: inline;
 }
 
 #tryItBtn {
@@ -1170,10 +1169,8 @@ body.panel-open .panel-vinyl-drop {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  position: absolute;
-  right: 20px;
-  top: 4px;
   padding: 8px 16px;
+  margin-left: 16px;
   background: transparent;
   background-color: transparent;
   border: 1px solid #1DB954;
@@ -1188,6 +1185,7 @@ body.panel-open .panel-vinyl-drop {
   text-decoration: none;
   box-sizing: border-box;
   line-height: 1.2;
+  vertical-align: middle;
 }
 
 #tryItBtn:hover,
@@ -1198,7 +1196,7 @@ body.panel-open .panel-vinyl-drop {
 }
 
 #tryItBtn.visible {
-  display: block;
+  display: inline-block;
 }
 
 .panel-artist {
@@ -1641,13 +1639,15 @@ body.panel-open .track-expanded {
     margin-bottom: 24px;
   }
 
-  .panel-title-row {
-    padding-right: 80px;
+  .panel-title {
+    font-size: 24px;
+    display: inline;
   }
 
   #tryItBtn {
     padding: 6px 14px;
     font-size: 13px;
+    margin-left: 12px;
   }
 
   .panel-controls {
