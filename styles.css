@@ -1166,6 +1166,7 @@ body.panel-open .panel-vinyl-drop {
   color: var(--white);
   margin-bottom: 0;
   flex: 1;
+  min-width: 0;
 }
 
 #tryItBtn {
@@ -1627,8 +1628,8 @@ body.panel-open .track-expanded {
   }
 
   .panel-title-row {
-    flex-wrap: wrap;
-    gap: 8px;
+    gap: 12px;
+    align-items: center;
   }
 
   #tryItBtn {
