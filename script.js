@@ -268,14 +268,24 @@ document.addEventListener('DOMContentLoaded', () => {
     panelDesc.innerHTML = desc;
     panelTotalTime.textContent = duration;
 
-    // Handle "Try it" button
+    // Handle "Try it" button - only show if data-demo URL exists
     const demoUrl = track.getAttribute('data-demo');
-    if (demoUrl && tryItBtn) {
-      tryItBtn.dataset.url = demoUrl;
-      tryItBtn.classList.add('visible');
-    } else if (tryItBtn) {
-      tryItBtn.dataset.url = '';
-      tryItBtn.classList.remove('visible');
+    if (tryItBtn) {
+      if (demoUrl && demoUrl.trim() !== '') {
+        tryItBtn.dataset.url = demoUrl;
+        tryItBtn.classList.add('visible');
+        // Inline styles as fallback for Google App Browser
+        tryItBtn.style.display = 'block';
+        tryItBtn.style.color = '#1DB954';
+        tryItBtn.style.backgroundColor = 'transparent';
+        tryItBtn.style.border = '1px solid #1DB954';
+        tryItBtn.style.borderRadius = '20px';
+        tryItBtn.style.textDecoration = 'none';
+      } else {
+        tryItBtn.dataset.url = '';
+        tryItBtn.classList.remove('visible');
+        tryItBtn.style.display = 'none';
+      }
     }
 
     // Reset state

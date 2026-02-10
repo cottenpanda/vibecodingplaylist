@@ -1171,29 +1171,38 @@ body.panel-open .panel-vinyl-drop {
 
 #tryItBtn {
   display: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   padding: 8px 16px;
   background: transparent;
-  border: 1px solid var(--green);
+  background-color: transparent;
+  border: 1px solid #1DB954;
   border-radius: 20px;
-  color: var(--green);
+  color: #1DB954;
   font-family: inherit;
   font-size: 14px;
   font-weight: 500;
   white-space: nowrap;
   cursor: pointer;
-  transition: all 0.2s ease;
   flex-shrink: 0;
   outline: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  line-height: 1.2;
+  vertical-align: middle;
+  align-self: center;
 }
 
 #tryItBtn:hover,
 #tryItBtn:active {
-  background: var(--green);
-  color: var(--bg);
+  background: #1DB954;
+  background-color: #1DB954;
+  color: #121212;
 }
 
 #tryItBtn.visible {
-  display: inline-block;
+  display: block;
 }
 
 .panel-artist {
