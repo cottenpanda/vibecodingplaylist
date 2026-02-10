@@ -125,6 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const panelTitle = document.getElementById('panelTitle');
   const panelArtist = document.getElementById('panelArtist');
   const panelDesc = document.getElementById('panelDesc');
+  const tryItBtn = document.getElementById('tryItBtn');
   const panelPlayBtn = document.getElementById('panelPlayBtn');
   const panelPrevBtn = document.getElementById('panelPrevBtn');
   const panelNextBtn = document.getElementById('panelNextBtn');
@@ -266,6 +267,15 @@ document.addEventListener('DOMContentLoaded', () => {
     panelArtist.textContent = artist;
     panelDesc.innerHTML = desc;
     panelTotalTime.textContent = duration;
+
+    // Handle "Try it" button
+    const demoUrl = track.getAttribute('data-demo');
+    if (demoUrl && tryItBtn) {
+      tryItBtn.href = demoUrl;
+      tryItBtn.classList.add('visible');
+    } else if (tryItBtn) {
+      tryItBtn.classList.remove('visible');
+    }
 
     // Reset state
     isYouTube = false;
