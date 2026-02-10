@@ -1171,10 +1171,8 @@ body.panel-open .panel-vinyl-drop {
   -moz-appearance: none;
   appearance: none;
   position: absolute;
-  right: 0;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
+  right: 20px;
+  top: 4px;
   padding: 8px 16px;
   background: transparent;
   background-color: transparent;

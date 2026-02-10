@@ -275,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tryItBtn.dataset.url = demoUrl;
         tryItBtn.classList.add('visible');
         // Inline styles as fallback for Google App Browser
-        tryItBtn.style.cssText = 'display: block; position: absolute; right: 0; top: 50%; transform: translateY(-50%); -webkit-transform: translateY(-50%); padding: 6px 14px; color: #1DB954; background: transparent; border: 1px solid #1DB954; border-radius: 20px; text-decoration: none; font-size: 13px; white-space: nowrap;';
+        tryItBtn.style.cssText = 'display: block; position: absolute; right: 20px; top: 4px; padding: 6px 14px; color: #1DB954; background: transparent; border: 1px solid #1DB954; border-radius: 20px; text-decoration: none; font-size: 13px; white-space: nowrap;';
       } else {
         tryItBtn.dataset.url = '';
         tryItBtn.classList.remove('visible');
