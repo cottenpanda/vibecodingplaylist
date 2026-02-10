@@ -579,7 +579,6 @@ body {
 
 .track.active {
   background: rgba(29, 185, 84, 0.1);
-  box-shadow: 0 0 20px rgba(29, 185, 84, 0.15), 0 0 40px rgba(29, 185, 84, 0.1);
 }
 
 .track.active .track-title {
