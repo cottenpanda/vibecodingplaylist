@@ -1174,18 +1174,26 @@ body.panel-open .panel-vinyl-drop {
   background: transparent;
   border: 1px solid var(--green);
   border-radius: 20px;
-  color: var(--green);
+  color: var(--green) !important;
   font-size: 14px;
   font-weight: 500;
-  text-decoration: none;
+  text-decoration: none !important;
   white-space: nowrap;
   transition: all 0.2s ease;
   flex-shrink: 0;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.try-it-btn:hover {
+.try-it-btn:hover,
+.try-it-btn:active {
   background: var(--green);
-  color: var(--bg);
+  color: var(--bg) !important;
+  text-decoration: none !important;
+}
+
+.try-it-btn:visited {
+  color: var(--green) !important;
 }
 
 .try-it-btn.visible {
@@ -1621,6 +1629,16 @@ body.panel-open .track-expanded {
 
   .panel-desc {
     font-size: 14px;
+  }
+
+  .panel-title-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .try-it-btn {
+    padding: 6px 14px;
+    font-size: 13px;
   }
 
   .panel-controls {
