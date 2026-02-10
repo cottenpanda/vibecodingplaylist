@@ -1091,7 +1091,7 @@ body.panel-open .panel-vinyl-drop {
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 60px 40px 40px;
+  padding: 40px 40px 24px;
   overflow-y: auto;
   will-change: transform;
 }
@@ -1102,7 +1102,7 @@ body.panel-open .panel-vinyl-drop {
   background: var(--bg);
   border-radius: 12px;
   overflow: hidden;
-  margin-bottom: 32px;
+  margin-bottom: 20px;
   position: relative;
   flex-shrink: 0;
 }
@@ -1162,14 +1162,14 @@ body.panel-open .panel-vinyl-drop {
 .panel-artist {
   font-size: 16px;
   color: var(--green);
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .panel-desc {
   font-size: 15px;
   color: var(--text-muted);
   line-height: 1.7;
-  margin-bottom: 32px;
+  margin-bottom: 20px;
   flex: 1;
 }
 
