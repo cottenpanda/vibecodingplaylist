@@ -1389,20 +1389,23 @@ body.panel-open .panel-vinyl-drop {
   right: 10px;
   width: 32px;
   height: 32px;
-  background: rgba(0, 0, 0, 0.6);
-  border: none;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: 50%;
   cursor: pointer;
-  color: var(--white);
+  color: var(--text-muted);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
   z-index: 10;
+  backdrop-filter: blur(10px);
 }
 
 .secret-close:hover {
-  background: rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  background: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.2);
   transform: rotate(90deg) scale(1.1);
 }
 
