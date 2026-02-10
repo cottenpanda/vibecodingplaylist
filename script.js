@@ -447,6 +447,9 @@ document.addEventListener('DOMContentLoaded', () => {
   panelPrevBtn.addEventListener('click', () => {
     if (currentTrackIndex > 0) {
       openPanel(currentTrackIndex - 1);
+    } else {
+      // Loop to last track
+      openPanel(tracks.length - 1);
     }
   });
 
@@ -574,7 +577,8 @@ document.addEventListener('DOMContentLoaded', () => {
   prevBtn.addEventListener('click', () => {
     if (currentTrackIndex > 0) {
       openPanel(currentTrackIndex - 1);
-    } else if (!isPanelOpen && tracks.length > 0) {
+    } else {
+      // Loop to last track
       openPanel(tracks.length - 1);
     }
   });
@@ -640,9 +644,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const swipeThreshold = 50;
 
-      if (videoTouchCurrentX > swipeThreshold && currentTrackIndex > 0) {
-        // Swipe right - previous track
-        const nextIndex = currentTrackIndex - 1;
+      if (videoTouchCurrentX > swipeThreshold) {
+        // Swipe right - previous track (loop to last if on first)
+        const nextIndex = currentTrackIndex > 0 ? currentTrackIndex - 1 : tracks.length - 1;
         videoSlider.style.transition = 'transform 0.3s ease-out';
         videoSlider.style.transform = 'translateX(100%)';
 
@@ -659,9 +663,9 @@ document.addEventListener('DOMContentLoaded', () => {
           });
         }, 300);
 
-      } else if (videoTouchCurrentX < -swipeThreshold && currentTrackIndex < tracks.length - 1) {
-        // Swipe left - next track
-        const nextIndex = currentTrackIndex + 1;
+      } else if (videoTouchCurrentX < -swipeThreshold) {
+        // Swipe left - next track (loop to first if on last)
+        const nextIndex = currentTrackIndex < tracks.length - 1 ? currentTrackIndex + 1 : 0;
         videoSlider.style.transition = 'transform 0.3s ease-out';
         videoSlider.style.transform = 'translateX(-100%)';
 
