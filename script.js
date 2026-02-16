@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ['#F59E0B', '#EF4444', '#A855F7', '#22C55E'], // 14. Fireworks
     ['#00FF00', '#0066FF', '#FF00FF', '#00FFFF'], // 15. Pixel rain mini game
     ['#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3'], // 16. Quick Interaction Experiments
+    ['#8B9DC3', '#6C5B7B', '#C06C84', '#F8B500'], // 17. Moments of waiting
   ];
 
   // Default blob colors
