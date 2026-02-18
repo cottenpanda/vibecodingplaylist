@@ -16,6 +16,7 @@ Style reference/
 # System files
 .DS_Store
 *.JPG
+!yanliudesignlife.JPG
 
 # Other large/unnecessary files
 2025 nature.mov
