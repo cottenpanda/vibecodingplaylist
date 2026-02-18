@@ -345,6 +345,13 @@ body {
   margin-bottom: 8px;
 }
 
+.artist-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .artist-name {
   color: var(--white);
   font-weight: 600;
@@ -1378,12 +1385,27 @@ body.panel-open .panel-vinyl-drop {
   transform: rotate(90deg) scale(1.1);
 }
 
+.secret-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+}
+
+.secret-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
 .secret-message {
   color: #b3b3b3;
   font-size: 14px;
   font-weight: 400;
-  text-align: center;
-  padding: 16px 20px;
+  text-align: left;
+  padding: 0;
   line-height: 1.5;
 }
 
