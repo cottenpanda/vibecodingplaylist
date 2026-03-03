@@ -46,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ['#FF6B6B', '#4ECDC4', '#FFE66D', '#95E1D3'], // 16. Quick Interaction Experiments
     ['#8B9DC3', '#6C5B7B', '#C06C84', '#F8B500'], // 17. Moments of waiting
     ['#C41E3A', '#D4A017', '#8B4513', '#F5E6C8'], // 18. Year of Horse 2026
+    ['#E8D5B7', '#7B9E87', '#C4A882', '#5B7065'], // 19. A letter to yourself
   ];
 
   // Default blob colors
