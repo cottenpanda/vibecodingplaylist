@@ -29,8 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Color palettes for each track (4 colors per track for 4 blobs)
   const trackColors = [
     ['#4ECDC4', '#FF6B9D', '#F7B733', '#7B68EE'], // 1. Cozy Journaling
-    ['#FF8C42', '#4ABDAC', '#A855F7', '#FFD93D'], // 2. yanliuos
-    ['#6366F1', '#EC4899', '#10B981', '#F59E0B'], // 3. Mindstream
+    ['#FF8C42', '#4ABDAC', '#A855F7', '#FFD93D'], // 2. Focus now
+    ['#7C3AED', '#F59E0B', '#06B6D4', '#EC4899'], // 3. Vibe coding learning
+    ['#6366F1', '#EC4899', '#10B981', '#F59E0B'], // 4. Mindstream
     ['#3B82F6', '#10B981', '#6366F1', '#F97316'], // 4. Focus now
     ['#8B5CF6', '#06B6D4', '#F43F5E', '#84CC16'], // 5. Virtual Online Studio
     ['#059669', '#7C3AED', '#F97316', '#0EA5E9'], // 6. 3D Cabin
